@@ -8,7 +8,7 @@
     :root {
       --primary: #059669;
       --primary-dark: #047857;
-      --bg-overlay: rgba(15, 23, 42, 0.72);
+      --bg-overlay: rgba(15, 23, 42, 0.56);
       --card-bg: rgba(255, 255, 255, 0.96);
       --text-main: #0f172a;
       --text-muted: #64748b;
@@ -25,17 +25,20 @@
 
     body {
       min-height: 100vh;
-      background: linear-gradient(135deg, #064e3b 0%, #0f172a 100%);
+      background-color: #0f172a;
+      background-image: linear-gradient(135deg, #064e3b 0%, #0f172a 100%);
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
       background-attachment: fixed;
       color: var(--text-main);
+      transition: background-image 0.4s ease;
     }
 
     .backdrop {
       min-height: 100vh;
       background: var(--bg-overlay);
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(3px);
       padding: 20px;
     }
 
@@ -53,7 +56,7 @@
       background: var(--card-bg);
       border-radius: 24px;
       padding: 36px 28px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
       text-align: center;
     }
 
@@ -85,7 +88,7 @@
 
     .field {
       text-align: left;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .field label {
@@ -96,17 +99,18 @@
       color: #334155;
     }
 
-    .field input {
+    .field input, .field select {
       width: 100%;
-      padding: 12px 14px;
+      padding: 11px 14px;
       border: 1.5px solid var(--border);
       border-radius: 12px;
-      font-size: 15px;
+      font-size: 14px;
       outline: none;
+      background: #fff;
       transition: 0.2s;
     }
 
-    .field input:focus {
+    .field input:focus, .field select:focus {
       border-color: var(--primary);
       box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
     }
@@ -115,8 +119,8 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      padding: 12px 18px;
+      gap: 6px;
+      padding: 11px 16px;
       border: none;
       border-radius: 12px;
       font-size: 14px;
@@ -139,22 +143,45 @@
       cursor: not-allowed;
     }
 
-    .btn-light {
-      background: rgba(255, 255, 255, 0.15);
+    .btn-admin {
+      background: #f59e0b;
       color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .btn-admin:hover {
+      background: #d97706;
+    }
+
+    .btn-light {
+      background: rgba(255, 255, 255, 0.16);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(4px);
     }
 
     .btn-light:hover {
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.28);
+    }
+
+    .btn-sm {
+      padding: 6px 10px;
+      font-size: 12px;
+      border-radius: 8px;
+    }
+
+    .btn-outline {
+      background: #ecfdf5;
+      color: var(--primary-dark);
+      border: 1px solid #a7f3d0;
+    }
+
+    .btn-outline:hover {
+      background: #d1fae5;
     }
 
     .btn-danger {
       background: #fee2e2;
       color: var(--danger);
-      padding: 6px 10px;
-      font-size: 12px;
-      border-radius: 8px;
     }
 
     .btn-danger:hover {
@@ -165,6 +192,17 @@
       background: #fef2f2;
       color: var(--danger);
       border: 1px solid #fecaca;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    .ok-box {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
       padding: 10px 12px;
       border-radius: 10px;
       font-size: 13px;
@@ -185,8 +223,9 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
       padding: 16px 20px;
       border-radius: 20px;
       color: #fff;
@@ -230,15 +269,15 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .tab-btn {
-      padding: 10px 16px;
+      padding: 9px 16px;
       border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      background: rgba(255, 255, 255, 0.1);
-      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(15, 23, 42, 0.55);
+      color: #f1f5f9;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
@@ -251,17 +290,16 @@
     }
 
     .status-bar {
-      color: #e2e8f0;
+      color: #f8fafc;
       font-size: 14px;
+      font-weight: 500;
       margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.6);
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
       gap: 16px;
     }
 
@@ -269,7 +307,7 @@
       background: var(--card-bg);
       border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
       display: flex;
       flex-direction: column;
     }
@@ -300,7 +338,7 @@
       position: absolute;
       top: 10px;
       left: 10px;
-      background: rgba(15, 23, 42, 0.78);
+      background: rgba(15, 23, 42, 0.8);
       color: #fff;
       font-size: 11px;
       font-weight: 600;
@@ -318,7 +356,7 @@
       padding: 14px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       flex: 1;
     }
 
@@ -337,9 +375,10 @@
     .media-actions {
       margin-top: auto;
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 6px;
       padding-top: 8px;
       border-top: 1px solid var(--border);
     }
@@ -355,7 +394,7 @@
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.78);
+      background: rgba(15, 23, 42, 0.8);
       display: none;
       align-items: center;
       justify-content: center;
@@ -366,7 +405,7 @@
     .modal-box {
       background: #fff;
       width: 100%;
-      max-width: 480px;
+      max-width: 500px;
       border-radius: 24px;
       padding: 24px;
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
@@ -420,7 +459,7 @@
       border: 2px dashed #10b981;
       background: #ecfdf5;
       border-radius: 16px;
-      padding: 26px 16px;
+      padding: 24px 16px;
       text-align: center;
       cursor: pointer;
       margin-bottom: 16px;
@@ -470,6 +509,43 @@
       margin-bottom: 16px;
     }
 
+    /* Admin jadval */
+    .user-list {
+      margin-top: 16px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .user-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      border-radius: 12px;
+    }
+
+    .role-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #d1fae5;
+      color: #065f46;
+      margin-left: 6px;
+    }
+
+    .role-tag.admin {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
     /* Ko'rish modali */
     .viewer-box {
       background: #0f172a;
@@ -514,13 +590,13 @@
         <form id="loginForm">
           <div class="field">
             <label>Login</label>
-            <input type="text" id="loginUser" placeholder="Loginni kiriting" required />
+            <input type="text" id="loginUser" placeholder="Loginni kiriting" autocomplete="username" required />
           </div>
           <div class="field">
             <label>Parol</label>
-            <input type="password" id="loginPass" placeholder="Parolni kiriting" required />
+            <input type="password" id="loginPass" placeholder="Parolni kiriting" autocomplete="current-password" required />
           </div>
-          <button type="submit" class="btn btn-primary" style="width:100%; padding:13px;">Kirish</button>
+          <button type="submit" id="loginSubmitBtn" class="btn btn-primary" style="width:100%; padding:13px;">Kirish</button>
         </form>
       </div>
     </div>
@@ -532,14 +608,15 @@
           <div class="brand-icon">Y</div>
           <div>
             <h2>Yasena Media</h2>
-            <span>Google Drive («Yasena Media» papkasi)</span>
+            <span id="currentUserBadge">Google Drive («Yasena Media»)</span>
           </div>
         </div>
         <div class="top-actions">
           <button class="btn btn-primary" onclick="openUploadModal()">+ Yuklash</button>
+          <button id="adminPanelBtn" class="btn btn-admin" style="display:none;" onclick="openAdminModal()">Admin panel</button>
           <button class="btn btn-light" onclick="document.getElementById('bgInput').click()">Fon rasmini yuklash</button>
           <input type="file" id="bgInput" accept="image/*" hidden onchange="uploadWallpaper(this.files[0])" />
-          <button class="btn btn-light" onclick="loadFiles()">Yangilash</button>
+          <button class="btn btn-light" onclick="loadAllData()">Yangilash</button>
           <button class="btn btn-light" onclick="logout()">Chiqish</button>
         </div>
       </div>
@@ -556,6 +633,43 @@
       </div>
 
       <div id="mediaGrid" class="grid"></div>
+    </div>
+  </div>
+
+  <!-- ADMIN PANEL MODALI -->
+  <div id="adminModal" class="modal-overlay" onclick="if(event.target===this) closeAdminModal()">
+    <div class="modal-box">
+      <div class="modal-head">
+        <div>
+          <h3 style="font-size:18px;">Admin panel — Foydalanuvchilar</h3>
+          <small style="color:#64748b;">Qo'shilgan loginlar barcha qurilmalarda ishlaydi</small>
+        </div>
+        <button class="close-btn" onclick="closeAdminModal()">×</button>
+      </div>
+
+      <div id="adminMsgOk" class="ok-box"></div>
+      <div id="adminMsgErr" class="err-box"></div>
+
+      <form id="addUserForm">
+        <div class="field">
+          <label>Yangi login</label>
+          <input type="text" id="newLogin" placeholder="Masalan: jasur" required />
+        </div>
+        <div class="field">
+          <label>Yangi parol</label>
+          <input type="text" id="newPass" placeholder="Masalan: 12345" required />
+        </div>
+        <div class="field">
+          <label>Huquq darajasi</label>
+          <select id="newRole">
+            <option value="user">Foydalanuvchi (faqat ko'rish va yuklash)</option>
+            <option value="admin">Admin (yangi login qo'sha oladi)</option>
+          </select>
+        </div>
+        <button type="submit" id="addUserBtn" class="btn btn-primary" style="width:100%;">+ Foydalanuvchi qo'shish va saqlash</button>
+      </form>
+
+      <div class="user-list" id="adminUsersList"></div>
     </div>
   </div>
 
@@ -619,13 +733,17 @@
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxV1EdmjkST0kip2extLEuH468MFJEEycdrzCEtPunqV7XIkiqCQPiGpqBTJnlHwbsBkA/exec";
 
-    const USERS = {
-      "yasena": "2222",
-      "asilbek": "yasena22",
-      "admin": "yasena2026"
-    };
+    // Doimiy zaxira admin va foydalanuvchilar
+    const DEFAULT_USERS = [
+      { login: "asilbek", pass: "yasena22", role: "admin" },
+      { login: "admin", pass: "yasena2026", role: "admin" },
+      { login: "yasena", pass: "2222", role: "user" }
+    ];
 
-    let allFiles = [];
+    let usersList = [...DEFAULT_USERS];
+    let currentSession = null;
+    let rawDriveFiles = [];
+    let allMediaFiles = [];
     let currentFilter = "all";
     let uploadCategory = "photo";
     let chosenFiles = [];
@@ -633,38 +751,180 @@
     let audioChunks = [];
     let isRecording = false;
 
-    // Kirish holatini tekshirish
-    window.addEventListener("DOMContentLoaded", () => {
-      if (localStorage.getItem("yasena_auth") === "1") {
-        showApp();
+    function encodeSafeB64(obj) {
+      const json = JSON.stringify(obj);
+      const b64 = btoa(unescape(encodeURIComponent(json)));
+      return b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    }
+
+    function decodeSafeB64(str) {
+      let b64 = str.replace(/-/g, "+").replace(/_/g, "/");
+      while (b64.length % 4) b64 += "=";
+      const json = decodeURIComponent(escape(atob(b64)));
+      return JSON.parse(json);
+    }
+
+    function mergeUsers(remoteUsers) {
+      const map = new Map();
+      DEFAULT_USERS.forEach(u => map.set(u.login.toLowerCase(), { ...u }));
+      if (Array.isArray(remoteUsers)) {
+        remoteUsers.forEach(u => {
+          if (u && u.login && u.pass) {
+            map.set(String(u.login).trim().toLowerCase(), {
+              login: String(u.login).trim().toLowerCase(),
+              pass: String(u.pass).trim(),
+              role: u.role === "admin" ? "admin" : "user"
+            });
+          }
+        });
       }
+      usersList = Array.from(map.values());
+    }
+
+    // Orqa fon rasmini ishonchli yuklash (bir nechta Google Drive havolasi orqali)
+    function applyBackgroundById(fileId) {
+      if (!fileId) return;
+      const candidates = [
+        `https://drive.google.com/thumbnail?id=${fileId}&sz=w1920`,
+        `https://lh3.googleusercontent.com/d/${fileId}`,
+        `https://drive.google.com/uc?export=view&id=${fileId}`
+      ];
+      let idx = 0;
+      function tryNext() {
+        if (idx >= candidates.length) return;
+        const url = candidates[idx++];
+        const img = new Image();
+        img.onload = () => {
+          document.body.style.backgroundImage = `url('${url}')`;
+        };
+        img.onerror = tryNext;
+        img.src = url;
+      }
+      tryNext();
+    }
+
+    // Google Drive'dan foydalanuvchilar, fon rasmi va media fayllarni olish
+    async function loadAllData() {
+      const status = document.getElementById("statusText");
+      if (status) status.textContent = "Google Drive'dan ma'lumotlar yuklanmoqda...";
+
+      try {
+        const res = await fetch(SCRIPT_URL + "?t=" + Date.now());
+        const data = await res.json();
+        if (!data.ok) return;
+
+        rawDriveFiles = data.files || [];
+
+        // 1. Eng oxirgi foydalanuvchilar ro'yxatini sinxronlash
+        const userCfgFile = rawDriveFiles.find(f => f.name && f.name.startsWith("sysusers_"));
+        if (userCfgFile) {
+          try {
+            const encoded = userCfgFile.name.replace(/^sysusers_/, "").replace(/\.json$/, "");
+            const decoded = decodeSafeB64(encoded);
+            mergeUsers(decoded);
+          } catch (e) {
+            console.warn("Users decode:", e);
+          }
+        }
+
+        // 2. Media fayllarni ajratib olish (tizim fayllarini yashirish)
+        allMediaFiles = rawDriveFiles.filter(f =>
+          f.name &&
+          !f.name.startsWith("sysusers_") &&
+          !f.name.startsWith("sysbg_")
+        );
+
+        // 3. Orqa fon rasmini aniqlash:
+        // Avval tanlangan sysbg_, keyin alohida wallpaper, bo'lmasa oxirgi yuklangan rasm!
+        const bgMarker = rawDriveFiles.find(f => f.name && f.name.startsWith("sysbg_"));
+        const wallpaperFile = allMediaFiles.find(f => f.category === "wallpaper");
+        const latestPhoto = allMediaFiles.find(f => f.category === "photo");
+
+        if (bgMarker) {
+          const targetId = bgMarker.name.replace(/^sysbg_/, "").replace(/\.json$/, "");
+          const stillExists = allMediaFiles.some(f => f.id === targetId);
+          if (stillExists) {
+            applyBackgroundById(targetId);
+          } else if (wallpaperFile) {
+            applyBackgroundById(wallpaperFile.id);
+          } else if (latestPhoto) {
+            applyBackgroundById(latestPhoto.id);
+          }
+        } else if (wallpaperFile) {
+          applyBackgroundById(wallpaperFile.id);
+        } else if (latestPhoto) {
+          applyBackgroundById(latestPhoto.id);
+        }
+
+        if (currentSession) {
+          renderFiles();
+          renderAdminUsers();
+        }
+      } catch (e) {
+        if (status) status.textContent = "Google Drive bilan bog'lanishda xato: " + e.message;
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", async () => {
+      const saved = localStorage.getItem("yasena_session");
+      if (saved) {
+        try {
+          currentSession = JSON.parse(saved);
+          showApp();
+        } catch (e) {
+          localStorage.removeItem("yasena_session");
+        }
+      }
+      await loadAllData();
     });
 
-    document.getElementById("loginForm").addEventListener("submit", (e) => {
+    // Tizimga kirish
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
+      const btn = document.getElementById("loginSubmitBtn");
+      const errBox = document.getElementById("loginErr");
+      errBox.style.display = "none";
+
       const u = document.getElementById("loginUser").value.trim().toLowerCase();
       const p = document.getElementById("loginPass").value.trim();
-      if (USERS[u] && USERS[u] === p) {
-        localStorage.setItem("yasena_auth", "1");
-        document.getElementById("loginErr").style.display = "none";
+
+      let matched = usersList.find(item => item.login.toLowerCase() === u && item.pass === p);
+
+      if (!matched) {
+        btn.disabled = true;
+        btn.textContent = "Tekshirilmoqda...";
+        await loadAllData();
+        matched = usersList.find(item => item.login.toLowerCase() === u && item.pass === p);
+        btn.disabled = false;
+        btn.textContent = "Kirish";
+      }
+
+      if (matched) {
+        currentSession = { login: matched.login, role: matched.role };
+        localStorage.setItem("yasena_session", JSON.stringify(currentSession));
         showApp();
+        if (allMediaFiles.length === 0) await loadAllData();
       } else {
-        document.getElementById("loginErr").style.display = "block";
+        errBox.style.display = "block";
       }
     });
 
     function showApp() {
       document.getElementById("loginScreen").style.display = "none";
       document.getElementById("appScreen").style.display = "block";
-      loadFiles();
+      document.getElementById("currentUserBadge").textContent =
+        `Foydalanuvchi: ${currentSession.login} (${currentSession.role === "admin" ? "Admin" : "A'zo"})`;
+      document.getElementById("adminPanelBtn").style.display =
+        currentSession.role === "admin" ? "inline-flex" : "none";
+      renderFiles();
     }
 
     function logout() {
-      localStorage.removeItem("yasena_auth");
+      localStorage.removeItem("yasena_session");
       location.reload();
     }
 
-    // Google Apps Script'ga xatosiz POST yuborish (CORS fallback bilan)
+    // Google Apps Script'ga xatosiz POST yuborish
     async function postToDrive(payload) {
       const bodyStr = JSON.stringify(payload);
       try {
@@ -675,7 +935,399 @@
         });
         return await res.json();
       } catch (err) {
-        // Agar brauzer redirect CORS'ni bloklasa, no-cors rejimida yuboriladi
         await fetch(SCRIPT_URL, {
           method: "POST",
-          mode: "no-cors
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: bodyStr
+        });
+        return { ok: true };
+      }
+    }
+
+    // Admin panel boshqaruvi
+    function openAdminModal() {
+      document.getElementById("adminMsgOk").style.display = "none";
+      document.getElementById("adminMsgErr").style.display = "none";
+      renderAdminUsers();
+      document.getElementById("adminModal").style.display = "flex";
+    }
+
+    function closeAdminModal() {
+      document.getElementById("adminModal").style.display = "none";
+    }
+
+    function renderAdminUsers() {
+      const box = document.getElementById("adminUsersList");
+      if (!box) return;
+      box.innerHTML = `<div style="font-size:13px; font-weight:700; color:#334155;">Faol foydalanuvchilar (${usersList.length} ta):</div>`;
+
+      usersList.forEach(u => {
+        const isProtected = u.login === "asilbek" || u.login === "admin";
+        const row = document.createElement("div");
+        row.className = "user-row";
+        row.innerHTML = `
+          <div>
+            <div style="font-size:14px; font-weight:700;">
+              ${escapeHtml(u.login)}
+              <span class="role-tag ${u.role === "admin" ? "admin" : ""}">${u.role === "admin" ? "Admin" : "Foydalanuvchi"}</span>
+            </div>
+            <div style="font-size:12px; color:#64748b;">Parol: <b>${escapeHtml(u.pass)}</b></div>
+          </div>
+          ${isProtected
+            ? `<small style="color:#94a3b8; font-size:11px;">Asosiy</small>`
+            : `<button class="btn btn-sm btn-danger" onclick="removeUser('${escapeHtml(u.login)}')">O'chirish</button>`
+          }
+        `;
+        box.appendChild(row);
+      });
+    }
+
+    async function saveUsersToDrive(updatedList) {
+      const encoded = encodeSafeB64(updatedList);
+      await postToDrive({
+        category: "sysusers",
+        fileName: `${encoded}.json`,
+        mimeType: "application/json",
+        base64: "e30="
+      });
+      usersList = updatedList;
+      renderAdminUsers();
+    }
+
+    document.getElementById("addUserForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const okBox = document.getElementById("adminMsgOk");
+      const errBox = document.getElementById("adminMsgErr");
+      const btn = document.getElementById("addUserBtn");
+      okBox.style.display = "none";
+      errBox.style.display = "none";
+
+      const login = document.getElementById("newLogin").value.trim().toLowerCase();
+      const pass = document.getElementById("newPass").value.trim();
+      const role = document.getElementById("newRole").value;
+
+      if (!login || !pass) return;
+
+      btn.disabled = true;
+      btn.textContent = "Google Drive'ga saqlanmoqda...";
+
+      try {
+        const filtered = usersList.filter(u => u.login.toLowerCase() !== login);
+        filtered.push({ login, pass, role });
+        await saveUsersToDrive(filtered);
+
+        document.getElementById("newLogin").value = "";
+        document.getElementById("newPass").value = "";
+        okBox.textContent = `«${login}» foydalanuvchisi saqlandi! Endi barcha qurilmalardan kirish mumkin.`;
+        okBox.style.display = "block";
+      } catch (err) {
+        errBox.textContent = "Saqlashda xatolik: " + err.message;
+        errBox.style.display = "block";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "+ Foydalanuvchi qo'shish va saqlash";
+      }
+    });
+
+    async function removeUser(loginToRemove) {
+      if (!confirm(`«${loginToRemove}» foydalanuvchisini o'chirmoqchimisiz?`)) return;
+      const filtered = usersList.filter(u => u.login.toLowerCase() !== loginToRemove.toLowerCase());
+      await saveUsersToDrive(filtered);
+    }
+
+    // Galereya filtri va chizish
+    function setFilter(filter, btn) {
+      currentFilter = filter;
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      renderFiles();
+    }
+
+    function renderFiles() {
+      const grid = document.getElementById("mediaGrid");
+      const status = document.getElementById("statusText");
+      const visible = allMediaFiles.filter(f => {
+        if (f.category === "wallpaper") return false;
+        if (currentFilter === "all") return true;
+        return f.category === currentFilter;
+      });
+
+      status.textContent = `Jami fayllar: ${visible.length} ta`;
+      grid.innerHTML = "";
+
+      if (visible.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; color:#f1f5f9; padding:40px;">Hozircha bu bo'limda fayllar yo'q. «+ Yuklash» tugmasini bosing.</div>`;
+        return;
+      }
+
+      visible.forEach(file => {
+        const card = document.createElement("div");
+        card.className = "media-card";
+
+        const dateStr = new Date(file.createdAt).toLocaleDateString("uz-UZ", {
+          year: "numeric", month: "short", day: "numeric"
+        });
+
+        let previewHtml = "";
+        let badge = "Rasm";
+        let bgBtn = "";
+
+        if (file.category === "photo") {
+          const thumbMain = `https://drive.google.com/thumbnail?id=${file.id}&sz=w800`;
+          previewHtml = `<img src="${thumbMain}" alt="${escapeHtml(file.name)}" loading="lazy" onerror="this.src='${file.thumbUrl}'" />`;
+          bgBtn = `<button class="btn btn-sm btn-outline" onclick="setAsBackground('${file.id}')">Fonga qo'yish</button>`;
+        } else if (file.category === "video") {
+          badge = "Video";
+          previewHtml = `<div class="icon-placeholder">▶<div style="font-size:13px; color:#fff; margin-top:6px;">Videoni ochish</div></div>`;
+        } else {
+          badge = "Ovozli";
+          previewHtml = `<div class="icon-placeholder">🎙<div style="font-size:13px; color:#fff; margin-top:6px;">Tinglash</div></div>`;
+        }
+
+        card.innerHTML = `
+          <div class="media-thumb" onclick='openViewer(${JSON.stringify(file).replace(/'/g, "&#39;")})'>
+            <span class="media-badge">${badge}</span>
+            ${previewHtml}
+          </div>
+          <div class="media-body">
+            <div class="media-title">${escapeHtml(file.name)}</div>
+            <div class="media-meta">${dateStr}</div>
+            <div class="media-actions">
+              <a class="link-btn" href="${file.downloadUrl}" target="_blank">Yuklab olish</a>
+              <div style="display:flex; gap:6px;">
+                ${bgBtn}
+                <button class="btn btn-sm btn-danger" onclick="deleteFile('${file.id}')">O'chirish</button>
+              </div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, m => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      }[m]));
+    }
+
+    // Istalgan rasmni orqa fonga o'rnatish (barcha qurilmalarda saqlanadi)
+    async function setAsBackground(fileId) {
+      applyBackgroundById(fileId);
+      document.getElementById("statusText").textContent = "Orqa fon rasmi saqlanmoqda...";
+      await postToDrive({
+        category: "sysbg",
+        fileName: `${fileId}.json`,
+        mimeType: "application/json",
+        base64: "e30="
+      });
+      document.getElementById("statusText").textContent = "Orqa fon rasmi yangilandi!";
+    }
+
+    // Yuklash modali boshqaruvi
+    function openUploadModal() {
+      chosenFiles = [];
+      document.getElementById("fileInput").value = "";
+      document.getElementById("customName").value = "";
+      document.getElementById("selectedInfo").textContent = "Maksimal hajm: bitta fayl uchun 25 MB";
+      document.getElementById("uploadErr").style.display = "none";
+      document.getElementById("progressWrap").style.display = "none";
+      document.getElementById("uploadModal").style.display = "flex";
+    }
+
+    function closeUploadModal() {
+      if (isRecording && mediaRecorder) mediaRecorder.stop();
+      document.getElementById("uploadModal").style.display = "none";
+    }
+
+    function selectUploadCat(cat, btn) {
+      uploadCategory = cat;
+      chosenFiles = [];
+      document.querySelectorAll(".cat-opt").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const input = document.getElementById("fileInput");
+      const title = document.getElementById("dropTitle");
+      const voiceBox = document.getElementById("voiceBox");
+
+      if (cat === "photo") {
+        input.accept = "image/*";
+        title.textContent = "Bir yoki bir nechta rasm tanlash uchun bosing";
+        voiceBox.style.display = "none";
+      } else if (cat === "video") {
+        input.accept = "video/*";
+        title.textContent = "Video fayl tanlash uchun bosing";
+        voiceBox.style.display = "none";
+      } else {
+        input.accept = "audio/*";
+        title.textContent = "Tayyor audio fayl tanlash uchun bosing";
+        voiceBox.style.display = "block";
+      }
+      document.getElementById("selectedInfo").textContent = "Maksimal hajm: bitta fayl uchun 25 MB";
+    }
+
+    function handleFileSelect(files) {
+      chosenFiles = Array.from(files);
+      if (chosenFiles.length > 0) {
+        const names = chosenFiles.map(f => `${f.name} (${(f.size / 1024 / 1024).toFixed(1)} MB)`).join(", ");
+        document.getElementById("selectedInfo").textContent = names;
+      }
+    }
+
+    async function toggleRecording() {
+      const btn = document.getElementById("recBtn");
+      const status = document.getElementById("recStatus");
+
+      if (!isRecording) {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          mediaRecorder = new MediaRecorder(stream);
+          audioChunks = [];
+          mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+          mediaRecorder.onstop = () => {
+            const blob = new Blob(audioChunks, { type: "audio/webm" });
+            const file = new File([blob], `ovoz_${Date.now()}.webm`, { type: "audio/webm" });
+            chosenFiles = [file];
+            document.getElementById("selectedInfo").textContent = `Yozib olindi: ${file.name} (${(file.size / 1024).toFixed(0)} KB)`;
+            stream.getTracks().forEach(t => t.stop());
+          };
+          mediaRecorder.start();
+          isRecording = true;
+          btn.textContent = "To'xtatish";
+          btn.style.background = "#dc2626";
+          status.textContent = "Ovoz yozilmoqda... Tugatish uchun bosing";
+        } catch (err) {
+          showUploadError("Mikrofonga ruxsat berilmadi: " + err.message);
+        }
+      } else {
+        mediaRecorder.stop();
+        isRecording = false;
+        btn.textContent = "Qayta yozish";
+        btn.style.background = "#059669";
+        status.textContent = "Ovoz tayyor! Endi «Google Drive'ga saqlash» tugmasini bosing.";
+      }
+    }
+
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(",")[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function showUploadError(msg) {
+      const box = document.getElementById("uploadErr");
+      box.textContent = msg;
+      box.style.display = "block";
+    }
+
+    async function startUpload() {
+      const errBox = document.getElementById("uploadErr");
+      errBox.style.display = "none";
+
+      if (chosenFiles.length === 0) {
+        showUploadError("Avval kamida bitta fayl tanlang yoki ovoz yozing.");
+        return;
+      }
+
+      for (const f of chosenFiles) {
+        if (f.size > 25 * 1024 * 1024) {
+          showUploadError(`«${f.name}» hajmi 25 MB dan katta.`);
+          return;
+        }
+      }
+
+      const saveBtn = document.getElementById("saveBtn");
+      const progWrap = document.getElementById("progressWrap");
+      const progText = document.getElementById("progressText");
+      const progFill = document.getElementById("progressFill");
+      const customNote = document.getElementById("customName").value.trim();
+
+      saveBtn.disabled = true;
+      progWrap.style.display = "block";
+
+      try {
+        for (let i = 0; i < chosenFiles.length; i++) {
+          const file = chosenFiles[i];
+          const pct = Math.round(((i + 0.5) / chosenFiles.length) * 100);
+          progText.textContent = `${i + 1} / ${chosenFiles.length} yuklanmoqda: ${file.name}`;
+          progFill.style.width = pct + "%";
+
+          const base64 = await fileToBase64(file);
+          const ext = file.name.includes(".") ? "." + file.name.split(".").pop() : "";
+          const finalName = customNote
+            ? (chosenFiles.length > 1 ? `${customNote}_${i + 1}${ext}` : `${customNote}${ext}`)
+            : file.name;
+
+          await postToDrive({
+            category: uploadCategory,
+            fileName: finalName,
+            mimeType: file.type || "application/octet-stream",
+            base64: base64
+          });
+        }
+
+        progFill.style.width = "100%";
+        progText.textContent = "Muvaffaqiyatli saqlandi!";
+        setTimeout(async () => {
+          closeUploadModal();
+          await loadAllData();
+        }, 500);
+      } catch (err) {
+        showUploadError("Yuklashda xatolik: " + err.message);
+      } finally {
+        saveBtn.disabled = false;
+      }
+    }
+
+    async function uploadWallpaper(file) {
+      if (!file) return;
+      const status = document.getElementById("statusText");
+      status.textContent = "Orqa fon rasmi Google Drive'ga yuklanmoqda...";
+      try {
+        const base64 = await fileToBase64(file);
+        await postToDrive({
+          category: "wallpaper",
+          fileName: "bg.jpg",
+          mimeType: file.type || "image/jpeg",
+          base64: base64
+        });
+        await loadAllData();
+      } catch (e) {
+        status.textContent = "Fon rasmini yuklashda xato: " + e.message;
+      }
+    }
+
+    async function deleteFile(id) {
+      if (!confirm("Ushbu faylni Google Drive'dan o'chirmoqchimisiz?")) return;
+      document.getElementById("statusText").textContent = "O'chirilmoqda...";
+      try {
+        await postToDrive({ action: "delete", id: id });
+        await loadAllData();
+      } catch (e) {
+        alert("O'chirishda xatolik: " + e.message);
+      }
+    }
+
+    function openViewer(file) {
+      document.getElementById("viewerTitle").textContent = file.name;
+      const content = document.getElementById("viewerContent");
+      if (file.category === "photo") {
+        const bigImg = `https://drive.google.com/thumbnail?id=${file.id}&sz=w1600`;
+        content.innerHTML = `<img src="${bigImg}" onerror="this.src='${file.thumbUrl}'" />`;
+      } else {
+        content.innerHTML = `<iframe src="${file.previewUrl}" allow="autoplay"></iframe>`;
+      }
+      document.getElementById("viewerModal").style.display = "flex";
+    }
+
+    function closeViewer() {
+      document.getElementById("viewerContent").innerHTML = "";
+      document.getElementById("viewerModal").style.display = "none";
+    }
+  </script>
+</body>
+</html>
