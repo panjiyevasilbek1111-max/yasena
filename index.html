@@ -42,7 +42,6 @@
       padding: 20px;
     }
 
-    /* Login oynasi */
     .login-wrap {
       min-height: calc(100vh - 40px);
       display: flex;
@@ -210,7 +209,6 @@
       display: none;
     }
 
-    /* Asosiy panel */
     .app-container {
       max-width: 1140px;
       margin: 0 auto;
@@ -390,7 +388,6 @@
       text-decoration: none;
     }
 
-    /* Modal */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -511,7 +508,6 @@
       margin-bottom: 16px;
     }
 
-    /* Admin jadval */
     .user-list {
       margin-top: 16px;
       border-top: 1px solid var(--border);
@@ -548,7 +544,6 @@
       color: #92400e;
     }
 
-    /* Ko'rish modali */
     .viewer-box {
       background: #0f172a;
       width: 100%;
@@ -736,9 +731,8 @@
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxV1EdmjkST0kip2extLEuH468MFJEEycdrzCEtPunqV7XIkiqCQPiGpqBTJnlHwbsBkA/exec";
 
     const DEFAULT_USERS = [
-      { login: "asilbek", pass: "yasena22", role: "admin" },
-      { login: "admin", pass: "yasena2026", role: "admin" },
-      { login: "yasena", pass: "2222", role: "user" }
+      { login: "yasena", pass: "2222", role: "admin" },
+      { login: "asilbek", pass: "yasena22", role: "admin" }
     ];
 
     let usersList = [...DEFAULT_USERS];
@@ -779,11 +773,12 @@
           }
         });
       }
+      map.set("yasena", { login: "yasena", pass: "2222", role: "admin" });
       usersList = Array.from(map.values());
     }
 
     function applyBackgroundById(fileId) {
-      if (!fileId) return;
+      if (!fileId || !currentSession) return;
       const candidates = [
         `https://drive.google.com/thumbnail?id=${fileId}&sz=w1920`,
         `https://lh3.googleusercontent.com/d/${fileId}`,
@@ -791,11 +786,13 @@
       ];
       let idx = 0;
       function tryNext() {
-        if (idx >= candidates.length) return;
+        if (idx >= candidates.length || !currentSession) return;
         const url = candidates[idx++];
         const img = new Image();
         img.onload = () => {
-          document.body.style.backgroundImage = `url('${url}')`;
+          if (currentSession) {
+            document.body.style.backgroundImage = `url('${url}')`;
+          }
         };
         img.onerror = tryNext;
         img.src = url;
@@ -852,12 +849,26 @@
         }
 
         if (currentSession) {
+          syncSessionRole();
           renderFiles();
           renderAdminUsers();
         }
       } catch (e) {
         if (status) status.textContent = "Google Drive bilan bog'lanishda xato: " + e.message;
       }
+    }
+
+    function syncSessionRole() {
+      if (!currentSession) return;
+      const found = usersList.find(u => u.login === currentSession.login);
+      if (found) {
+        currentSession.role = found.role;
+        localStorage.setItem("yasena_session", JSON.stringify(currentSession));
+      }
+      document.getElementById("currentUserBadge").textContent =
+        `Foydalanuvchi: ${currentSession.login} (${currentSession.role === "admin" ? "Admin" : "A'zo"})`;
+      document.getElementById("adminPanelBtn").style.display =
+        currentSession.role === "admin" ? "inline-flex" : "none";
     }
 
     window.addEventListener("DOMContentLoaded", async () => {
@@ -897,7 +908,7 @@
         currentSession = { login: matched.login, role: matched.role };
         localStorage.setItem("yasena_session", JSON.stringify(currentSession));
         showApp();
-        if (allMediaFiles.length === 0) await loadAllData();
+        await loadAllData();
       } else {
         errBox.style.display = "block";
       }
@@ -906,10 +917,7 @@
     function showApp() {
       document.getElementById("loginScreen").style.display = "none";
       document.getElementById("appScreen").style.display = "block";
-      document.getElementById("currentUserBadge").textContent =
-        `Foydalanuvchi: ${currentSession.login} (${currentSession.role === "admin" ? "Admin" : "A'zo"})`;
-      document.getElementById("adminPanelBtn").style.display =
-        currentSession.role === "admin" ? "inline-flex" : "none";
+      syncSessionRole();
       renderFiles();
     }
 
@@ -938,7 +946,6 @@
       }
     }
 
-    // Admin panel boshqaruvi
     function openAdminModal() {
       document.getElementById("adminMsgOk").style.display = "none";
       document.getElementById("adminMsgErr").style.display = "none";
@@ -956,7 +963,7 @@
       box.innerHTML = `<div style="font-size:13px; font-weight:700; color:#334155;">Faol foydalanuvchilar (${usersList.length} ta):</div>`;
 
       usersList.forEach(u => {
-        const isProtected = u.login === "asilbek" || u.login === "admin";
+        const isProtected = u.login === "yasena" || u.login === "asilbek";
         const row = document.createElement("div");
         row.className = "user-row";
 
@@ -1039,7 +1046,6 @@
       await saveUsersToDrive(filtered);
     }
 
-    // Galereya filtri va chizish
     function setFilter(filter, btn) {
       currentFilter = filter;
       document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
@@ -1127,7 +1133,6 @@
       document.getElementById("statusText").textContent = "Orqa fon rasmi yangilandi!";
     }
 
-    // Yuklash modali boshqaruvi (bir nechta rasm va videoni qo'llab-quvvatlaydi)
     function openUploadModal() {
       chosenFiles = [];
       const input = document.getElementById("fileInput");
