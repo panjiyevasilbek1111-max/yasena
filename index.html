@@ -659,8 +659,8 @@
         <div class="field">
           <label>Huquq darajasi</label>
           <select id="newRole">
-            <option value="user">Foydalanuvchi (faqat ko'rish va yuklash)</option>
-            <option value="admin">Admin (yangi login qo'sha oladi)</option>
+            <option value="user">Foydalanuvchi (ko'rish va yuklash, o'chira olmaydi)</option>
+            <option value="admin">Admin (to'liq boshqaruv va o'chirish huquqi)</option>
           </select>
         </div>
         <button type="submit" id="addUserBtn" class="btn btn-primary" style="width:100%;">+ Foydalanuvchi qo'shish va saqlash</button>
@@ -866,7 +866,7 @@
         localStorage.setItem("yasena_session", JSON.stringify(currentSession));
       }
       document.getElementById("currentUserBadge").textContent =
-        `Foydalanuvchi: ${currentSession.login} (${currentSession.role === "admin" ? "Admin" : "A'zo"})`;
+        `Foydalanuvchi: ${currentSession.login} (${currentSession.role === "admin" ? "Admin" : "Kuzatuvchi"})`;
       document.getElementById("adminPanelBtn").style.display =
         currentSession.role === "admin" ? "inline-flex" : "none";
     }
@@ -947,6 +947,7 @@
     }
 
     function openAdminModal() {
+      if (!currentSession || currentSession.role !== "admin") return;
       document.getElementById("adminMsgOk").style.display = "none";
       document.getElementById("adminMsgErr").style.display = "none";
       renderAdminUsers();
@@ -971,7 +972,7 @@
         info.innerHTML = `
           <div style="font-size:14px; font-weight:700;">
             ${escapeHtml(u.login)}
-            <span class="role-tag ${u.role === "admin" ? "admin" : ""}">${u.role === "admin" ? "Admin" : "Foydalanuvchi"}</span>
+            <span class="role-tag ${u.role === "admin" ? "admin" : ""}">${u.role === "admin" ? "Admin" : "Kuzatuvchi"}</span>
           </div>
           <div style="font-size:12px; color:#64748b;">Parol: <b>${escapeHtml(u.pass)}</b></div>
         `;
@@ -1007,6 +1008,7 @@
 
     document.getElementById("addUserForm").addEventListener("submit", async (e) => {
       e.preventDefault();
+      if (!currentSession || currentSession.role !== "admin") return;
       const okBox = document.getElementById("adminMsgOk");
       const errBox = document.getElementById("adminMsgErr");
       const btn = document.getElementById("addUserBtn");
@@ -1041,6 +1043,7 @@
     });
 
     async function removeUser(loginToRemove) {
+      if (!currentSession || currentSession.role !== "admin") return;
       if (!confirm(`«${loginToRemove}» foydalanuvchisini o'chirmoqchimisiz?`)) return;
       const filtered = usersList.filter(u => u.login.toLowerCase() !== loginToRemove.toLowerCase());
       await saveUsersToDrive(filtered);
@@ -1056,6 +1059,7 @@
     function renderFiles() {
       const grid = document.getElementById("mediaGrid");
       const status = document.getElementById("statusText");
+      const isAdmin = currentSession && currentSession.role === "admin";
       const visible = allMediaFiles.filter(f => {
         if (f.category === "wallpaper") return false;
         if (currentFilter === "all") return true;
@@ -1081,6 +1085,9 @@
         let previewHtml = "";
         let badge = "Rasm";
         let bgBtn = "";
+        const delBtn = isAdmin
+          ? `<button class="btn btn-sm btn-danger" onclick="deleteFile('${file.id}')">O'chirish</button>`
+          : "";
 
         if (file.category === "photo") {
           const thumbMain = `https://drive.google.com/thumbnail?id=${file.id}&sz=w800`;
@@ -1106,7 +1113,7 @@
               <a class="link-btn" href="${file.downloadUrl}" target="_blank">Yuklab olish</a>
               <div style="display:flex; gap:6px;">
                 ${bgBtn}
-                <button class="btn btn-sm btn-danger" onclick="deleteFile('${file.id}')">O'chirish</button>
+                ${delBtn}
               </div>
             </div>
           </div>
@@ -1313,6 +1320,10 @@
     }
 
     async function deleteFile(id) {
+      if (!currentSession || currentSession.role !== "admin") {
+        alert("Sizda fayllarni o'chirish huquqi yo'q!");
+        return;
+      }
       if (!confirm("Ushbu faylni Google Drive'dan o'chirmoqchimisiz?")) return;
       document.getElementById("statusText").textContent = "O'chirilmoqda...";
       try {
