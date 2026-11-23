@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="uz" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Asosiy SEO meta teglari -->
+    <title>Yasena — Shaxsiy Media Arxiv | yasena22.uz</title>
+    <meta name="description" content="Yasena (yasena22.uz) — Yasenaning rasmlari, videolari va ovozli xabarlarini saqlash uchun mo'ljallangan shaxsiy oilaviy media-arxiv.">
+    <meta name="keywords" content="Yasena, yasena22.uz, media arxiv, rasmlar, videolar, ovozli xabarlar, oilaviy albom">
+    <meta name="author" content="Yasena">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yasena22.uz">
+
+    <!-- Open Graph (ijtimoiy tarmoqlar va qidiruv tizimlari uchun) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Yasena">
+    <meta property="og:title" content="Yasena — Shaxsiy Media Arxiv | yasena22.uz">
+    <meta property="og:description" content="Yasenaning eng go'zal xotiralari: rasmlar, videolar va ovozli xabarlar bir joyda.">
+    <meta property="og:url" content="https://yasena22.uz">
+    <meta property="og:locale" content="uz_UZ">
+
+    <!-- Twitter / X meta teglari -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Yasena — yasena22.uz">
+    <meta name="twitter:description" content="Yasenaning shaxsiy media arxivi — yasena22.uz.">
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        };
+    </script>
+
+    <style>
+        /* Kirgandan so'ng asosiy sahifaning to'liq ekranli orqa fon rasmi */
+        .yasena-bg-photo {
+            background-image: url('ea4ac719-3ca1-46fd-a6af-be8de1c8320a.jpg');
+            background-size: cover;
+            background-position: center top;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        /* Mobil qurilmalarda fixed background silliq ishlashi uchun */
+        @supports (-webkit-touch-callout: none) {
+            .yasena-bg-photo {
+                background-attachment: scroll;
+            }
+        }
+
+        /* Ovoz yozish paytidagi to'lqin animatsiyasi */
+        @keyframes pulseWave {
+            0%, 100% { transform: scaleY(0.35); opacity: 0.6; }
+            50% { transform: scaleY(1); opacity: 1; }
+        }
+        .wave-bar {
+            animation: pulseWave 1s ease-in-out infinite;
+        }
+        .wave-bar:nth-child(2) { animation-delay: 0.15s; }
+        .wave-bar:nth-child(3) { animation-delay: 0.3s; }
+        .wave-bar:nth-child(4) { animation-delay: 0.45s; }
+        .wave-bar:nth-child(5) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-emerald-600 via-green-700 to-teal-800 dark:from-emerald-950 dark:via-green-950 dark:to-slate-950 text-slate-900 dark:text-emerald-50 font-sans antialiased transition-colors duration-300 selection:bg-emerald-400 selection:text-emerald-950">
+
+    <!-- =================================================================== -->
+    <!-- 1. YOPIQ KIRISH EKRANI (RO'YXATDAN O'TISH YO'Q)                     -->
+    <!-- =================================================================== -->
+    <section id="auth-screen" class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+        <!-- Dekorativ yashil yorug'liklar -->
+        <div class="pointer-events-none absolute -top-24 -left-24 w-80 h-80 rounded-full bg-emerald-300/20 dark:bg-emerald-500/10 blur-3xl" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-teal-300/20 dark:bg-teal-500/10 blur-3xl" aria-hidden="true"></div>
+
+        <!-- Mavzu tugmasi -->
+        <div class="fixed top-4 right-4 z-30">
+            <button type="button" data-theme-toggle aria-label="Mavzuni almashtirish" title="Och / To'q yashil rejim"
+                class="p-2.5 rounded-xl bg-white/20 hover:bg-white/30 dark:bg-emerald-900/60 dark:hover:bg-emerald-800/70 backdrop-blur-md border border-white/30 dark:border-emerald-700/60 text-white shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-emerald-300">
+                <svg class="sun-icon w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+                <svg class="moon-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Kirish kartochkasi -->
+        <div class="relative z-10 w-full max-w-md rounded-3xl bg-white/95 dark:bg-emerald-950/85 backdrop-blur-xl border border-white/40 dark:border-emerald-800/70 shadow-2xl p-6 sm:p-8">
+            <div class="text-center mb-7">
+                <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-emerald-500 to-green-700 flex items-center justify-center text-white shadow-lg shadow-emerald-600/30 mb-3">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                    </svg>
+                </div>
+                <h1 class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                    Yasena <span class="text-emerald-600 dark:text-emerald-400">Arxiv</span>
+                </h1>
+                <p class="text-xs sm:text-sm text-slate-500 dark:text-emerald-300/80 mt-1.5">
+                    yasena22.uz &mdash; Yasenaning shaxsiy media-arxiviga kirish uchun login va parolni kiriting
+                </p>
+            </div>
+
+            <!-- Xatolik xabari -->
+            <div id="auth-feedback" class="hidden mb-5 p-3.5 rounded-xl text-xs sm:text-sm font-medium border bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-800" role="alert"></div>
+
+            <!-- Kirish formasi -->
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label for="login-username" class="block text-sm font-medium text-slate-700 dark:text-emerald-200 mb-1.5">
+                        Login
+                    </label>
+                    <input id="login-username" name="username" type="text" required autocomplete="username" placeholder="Loginingizni kiriting"
+                        class="w-full px-4 py-3 rounded-xl bg-emerald-50/70 dark:bg-emerald-900/40 border border-emerald-200 dark:border-emerald-800 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-emerald-400/60 focus:outline-none focus:ring-2 focus:ring-emerald-500/60 focus:border-emerald-500 transition-all">
+                </div>
+
+                <div>
+                    <label for="login-password" class="block text-sm font-medium text-slate-700 dark:text-emerald-200 mb-1.5">
+                        Parol
+                    </label>
+                    <div class="relative">
+                        <input id="login-password" name="password" type="password" required autocomplete="current-password" placeholder="Parolingizni kiriting"
+                            class="w-full pl-4 pr-11 py-3 rounded-xl bg-emerald-50/70 dark:bg-emerald-900/40 border border-emerald-200 dark:border-emerald-800 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-emerald-400/60 focus:outline-none focus:ring-2 focus:ring-emerald-500/60 focus:border-emerald-500 transition-all">
+                        <button type="button" id="toggle-password-btn" aria-label="Parolni ko'rsatish yoki yashirish"
+                            class="absolute inset-y-0 right-0 px-3.5 flex items-center text-slate-400 hover:text-emerald-600 dark:text-emerald-400 dark:hover:text-emerald-200 transition-colors">
+                            <svg id="eye-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                            <svg id="eye-closed" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit"
+                    class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 active:scale-[0.99] text-white font-semibold text-sm shadow-lg shadow-emerald-600/30 transition-all flex items-center justify-center gap-2">
+                    <span>Kirish</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+                    </svg>
+                </button>
+            </form>
+        </div>
+
+        <p class="relative z-10 mt-6 text-xs text-emerald-100/90 dark:text-emerald-400/80 text-center">
+            &copy; 2026 Yasena &mdash; yasena22.uz | a.yasena2022@gmail.com
+        </p>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- 2. ASOSIY MEDIA-ARXIV (ORQA FONDA YASENANING RASMI BILAN)           -->
+    <!-- =================================================================== -->
+    <div id="app-content" class="hidden min-h-screen flex flex-col relative yasena-bg-photo">
+        <!-- Yengil zumrad-yashil shaffof qatlam (orqa fon rasmini tiniq saqlaydi) -->
+        <div id="bg-overlay" class="fixed inset-0 bg-gradient-to-b from-emerald-950/35 via-emerald-950/20 to-emerald-950/55 dark:from-emerald-950/60 dark:via-emerald-950/45 dark:to-slate-950/75 pointer-events-none z-0 transition-opacity duration-500" aria-hidden="true"></div>
+
+        <!-- Fonni to'liq ko'rish rejimida qaytish tugmasi -->
+        <button id="restore-ui-btn" type="button"
+            class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-emerald-950/75 hover:bg-emerald-900/90 backdrop-blur-xl border border-emerald-300/40 text-white text-sm font-semibold shadow-2xl transition-all">
+            <svg class="w-5 h-5 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+            Arxivga qaytish
+        </button>
+
+        <!-- Yopishqoq shaffof navigatsiya paneli -->
+        <header id="main-header" class="sticky top-0 z-40 w-full border-b border-emerald-200/20 dark:border-emerald-700/40 bg-emerald-950/55 dark:bg-emerald-950/80 backdrop-blur-lg transition-all duration-300 shadow-lg">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+                <!-- Brend logotipi -->
+                <div class="flex items-center gap-2.5 shrink-0">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-green-600 flex items-center justify-center text-white shadow-md shadow-emerald-950/40">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="text-lg sm:text-xl font-extrabold tracking-tight text-white leading-none block">
+                            Yasena<span class="text-emerald-400">.</span>
+                        </span>
+                        <span class="text-[11px] font-medium text-emerald-200/80">Shaxsiy Media Arxiv</span>
+                    </div>
+                </div>
+
+                <!-- Media hisoblagichlar (Desktop) -->
+                <div class="hidden lg:flex items-center gap-2">
+                    <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 border border-emerald-200/20 text-xs font-medium text-emerald-50">
+                        <span class="text-emerald-300">Rasmlar:</span>
+                        <strong id="nav-count-photo" class="text-white">0</strong>
+                    </div>
+                    <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 border border-emerald-200/20 text-xs font-medium text-emerald-50">
+                        <span class="text-teal-300">Videolar:</span>
+                        <strong id="nav-count-video" class="text-white">0</strong>
+                    </div>
+                    <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 border border-emerald-200/20 text-xs font-medium text-emerald-50">
+                        <span class="text-lime-300">Ovozli:</span>
+                        <strong id="nav-count-audio" class="text-white">0</strong>
+                    </div>
+                </div>
+
+                <!-- Boshqaruv tugmalari -->
+                <div class="flex items-center gap-2">
+                    <!-- Fonni ko'rish tugmasi -->
+                    <button id="bg-view-toggle" type="button" title="Orqa fondagi rasmni to'liq ko'rish"
+                        class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-emerald-200/25 bg-white/10 hover:bg-white/20 text-emerald-50 text-xs font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-emerald-400/60">
+                        <svg class="w-4 h-4 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                        <span class="hidden sm:inline">Fonni ko'rish</span>
+                    </button>
+
+                    <!-- Och / To'q yashil mavzu tugmasi -->
+                    <button type="button" data-theme-toggle aria-label="Mavzuni almashtirish" title="Och / To'q yashil rejim"
+                        class="p-2 rounded-xl border border-emerald-200/25 bg-white/10 hover:bg-white/20 text-emerald-100 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-400/60">
+                        <svg class="sun-icon w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        <svg class="moon-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Foydalanuvchi nishoni -->
+                    <div class="hidden md:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-500/20 border border-emerald-300/30 text-emerald-100 text-xs font-semibold">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        <span id="current-username">yasena</span>
+                    </div>
+
+                    <!-- Chiqish tugmasi -->
+                    <button id="logout-btn" type="button"
+                        class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-rose-500/25 hover:bg-rose-500/40 border border-rose-300/30 text-rose-100 text-xs font-semibold transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                        </svg>
+                        <span>Chiqish</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Asosiy kontent -->
+        <main id="main-content" class="relative z-10 flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6 transition-opacity duration-500">
+
+            <!-- Yuqori kutib olish va tezkor qo'shish paneli -->
+            <section class="p-5 sm:p-7 rounded-3xl bg-emerald-950/50 dark:bg-emerald-950/75 backdrop-blur-md border border-emerald-200/25 shadow-2xl">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/25 border border-emerald-300/30 text-emerald-100 text-xs font-semibold mb-3">
+                            <span class="w-2 h-2 rounded-full bg-lime-300 animate-pulse"></span>
+                            yasena22.uz &mdash; Oilaviy xotiralar albomi
+                        </div>
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                            Yasenaning rasmlari, videolari va ovozli xabarlari
+                        </h1>
+                        <p class="text-sm text-emerald-100/90 mt-1.5 max-w-2xl">
+                            Barcha rasmlar, videolar va yozib olingan ovozli xabarlar shu yerda tartibli va xavfsiz saqlanadi.
+                        </p>
+                    </div>
+
+                    <!-- 3 ta tezkor media qo'shish tugmasi -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 shrink-0">
+                        <button type="button" data-open-upload="photo"
+                            class="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 active:scale-[0.98] text-emerald-950 font-bold text-xs sm:text-sm shadow-lg shadow-emerald-950/30 transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            Rasm qo'shish
+                        </button>
+                        <button type="button" data-open-upload="video"
+                            class="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-teal-400 hover:bg-teal-300 active:scale-[0.98] text-emerald-950 font-bold text-xs sm:text-sm shadow-lg shadow-emerald-950/30 transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                            Video qo'shish
+                        </button>
+                        <button type="button" data-open-upload="audio"
+                            class="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-lime-400 hover:bg-lime-300 active:scale-[0.98] text-emerald-950 font-bold text-xs sm:text-sm shadow-lg shadow-emerald-950/30 transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                            </svg>
+                            Ovozli xabar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobil hisoblagichlar -->
+                <div class="grid grid-cols-3 gap-2 mt-5 pt-4 border-t border-emerald-200/15 lg:hidden">
+                    <div class="text-center p-2.5 rounded-xl bg-white/10 border border-emerald-200/15">
+                        <span class="block text-[11px] text-emerald-200">Rasmlar</span>
+                        <strong id="mob-count-photo" class="text-base font-bold text-white">0</strong>
+                    </div>
+                    <div class="text-center p-2.5 rounded-xl bg-white/10 border border-emerald-200/15">
+                        <span class="block text-[11px] text-teal-200">Videolar</span>
+                        <strong id="mob-count-video" class="text-base font-bold text-white">0</strong>
+                    </div>
+                    <div class="text-center p-2.5 rounded-xl bg-white/10 border border-emerald-200/15">
+                        <span class="block text-[11px] text-lime-200">Ovozli</span>
+                        <strong id="mob-count-audio" class="text-base font-bold text-white">0</strong>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filtrlar va Qidiruv paneli -->
+            <section class="p-4 rounded-2xl bg-emerald-950/50 dark:bg-emerald-950/75 backdrop-blur-md border border-emerald-200/20 shadow-xl flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+                <!-- Kategoriya tablari -->
+                <div class="flex flex-wrap items-center gap-1.5" role="tablist" aria-label="Media turlari">
+                    <button type="button" data-filter="all"
+                        class="filter-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-emerald-500 text-emerald-950 shadow">
+                        Barchasi <span id="tab-count-all" class="ml-1 opacity-80">(0)</span>
+                    </button>
+                    <button type="button" data-filter="photo"
+                        class="filter-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-white/10 hover:bg-white/20 text-emerald-50">
+                        Rasmlar <span id="tab-count-photo" class="ml-1 opacity-80">(0)</span>
+                    </button>
+                    <button type="button" data-filter="video"
+                        class="filter-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-white/10 hover:bg-white/20 text-emerald-50">
+                        Videolar <span id="tab-count-video" class="ml-1 opacity-80">(0)</span>
+                    </button>
+                    <button type="button" data-filter="audio"
+                        class="filter-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-white/10 hover:bg-white/20 text-emerald-50">
+                        Ovozli xabarlar <span id="tab-count-audio" class="ml-1 opacity-80">(0)</span>
+                    </button>
+                </div>
+
+                <!-- Qidiruv maydoni -->
+                <div class="relative w-full md:w-72">
+                    <svg class="w-4 h-4 text-emerald-300 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <input id="search-input" type="search" placeholder="Nom yoki sana bo'yicha qidirish..."
+                        class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/10 border border-emerald-200/25 text-xs sm:text-sm text-white placeholder-emerald-200/70 focus:outline-none focus:ring-2 focus:ring-emerald-400/60 focus:border-emerald-400 transition-all">
+                </div>
+            </section>
+
+            <!-- Galereya panjarasi -->
+            <section aria-label="Media galereyasi">
+                <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+
+                <!-- Bo'sh holat (Empty State) -->
+                <div id="empty-state" class="hidden p-10 sm:p-14 rounded-3xl bg-emerald-950/50 dark:bg-emerald-950/75 backdrop-blur-md border border-emerald-200/20 text-center shadow-xl">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-emerald-500/20 border border-emerald-300/30 text-emerald-300 flex items-center justify-center mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h2 id="empty-state-title" class="text-lg sm:text-xl font-bold text-white mb-2">
+                        Hozircha hech narsa yuklanmagan
+                    </h2>
+                    <p id="empty-state-desc" class="text-sm text-emerald-100/85 max-w-md mx-auto mb-6">
+                        Yasenaning ilk rasmini, videosini yoki ovozli xabarini yuklab, oilaviy arxivni to'ldirishni boshlang!
+                    </p>
+                    <button type="button" data-open-upload="photo"
+                        class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold text-sm shadow-lg transition-all">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        Birinchi faylni qo'shish
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer id="main-footer" class="relative z-10 border-t border-emerald-200/20 bg-emerald-950/60 dark:bg-emerald-950/85 backdrop-blur-lg py-6 px-4 sm:px-6 transition-opacity duration-500">
+            <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm text-emerald-100/90">
+                <p class="text-center sm:text-left">
+                    &copy; 2026 <strong class="text-white">Yasena</strong> &mdash;
+                    <a href="https://yasena22.uz" target="_blank" rel="noopener noreferrer" class="underline decoration-emerald-400/60 hover:text-emerald-300 transition-colors">yasena22.uz</a>
+                </p>
+                <a href="mailto:a.yasena2022@gmail.com" class="inline-flex items-center gap-1.5 hover:text-emerald-300 transition-colors">
+                    <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    a.yasena2022@gmail.com
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- 3. MEDIA QO'SHISH MODALI (RASM / VIDEO / OVOZLI XABAR)              -->
+    <!-- =================================================================== -->
+    <div id="upload-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-emerald-950/75 backdrop-blur-md overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="upload-modal-title">
+        <div class="w-full max-w-lg rounded-3xl bg-white/95 dark:bg-emerald-950/95 border border-emerald-200/50 dark:border-emerald-700/70 shadow-2xl p-5 sm:p-7 my-auto">
+            <!-- Modal sarlavhasi -->
+            <div class="flex items-center justify-between gap-3 mb-5">
+                <h2 id="upload-modal-title" class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">
+                    Media qo'shish
+                </h2>
+                <button type="button" id="close-upload-modal" aria-label="Yopish"
+                    class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-emerald-900/70 dark:hover:bg-emerald-800 text-slate-600 dark:text-emerald-200 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Tur tanlash tablari -->
+            <div class="grid grid-cols-3 gap-2 p-1 rounded-2xl bg-emerald-100/70 dark:bg-emerald-900/50 mb-5">
+                <button type="button" data-upload-tab="photo" class="upload-type-tab py-2 px-2 rounded-xl text-xs font-bold transition-all">
+                    Rasm
+                </button>
+                <button type="button" data-upload-tab="video" class="upload-type-tab py-2 px-2 rounded-xl text-xs font-bold transition-all">
+                    Video
+                </button>
+                <button type="button" data-upload-tab="audio" class="upload-type-tab py-2 px-2 rounded-xl text-xs font-bold transition-all">
+                    Ovozli xabar
+                </button>
+            </div>
+
+            <!-- Form -->
+            <form id="upload-form" class="space-y-4">
+                <!-- Nom -->
+                <div>
+                    <label for="media-title" class="block text-xs sm:text-sm font-semibold text-slate-700 dark:text-emerald-200 mb-1.5">
+                        Sarlavha / Izoh
+                    </label>
+                    <input id="media-title" type="text" required placeholder="Masalan: Yasenaning bog'chadagi bayrami"
+                        class="w-full px-4 py-2.5 rounded-xl bg-emerald-50/70 dark:bg-emerald-900/40 border border-emerald-200 dark:border-emerald-800 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-emerald-400/60 focus:outline-none focus:ring-2 focus:ring-emerald-500/60">
+                </div>
+
+                <!-- Sana -->
+                <div>
+                    <label for="media-date" class="block text-xs sm:text-sm font-semibold text-slate-700 dark:text-emerald-200 mb-1.5">
+                        Sana
+                    </label>
+                    <input id="media-date" type="date" required
+                        class="w-full px-4 py-2.5 rounded-xl bg-emerald-50/70 dark:bg-emerald-900/40 border border-emerald-200 dark:border-emerald-800 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/60">
+                </div>
+
+                <!-- 1. Rasm / Video yuklash maydoni -->
+                <div id="file-upload-section">
+                    <label for="media-file-input" class="block text-xs sm:text-sm font-semibold text-slate-700 dark:text-emerald-200 mb-1.5">
+                        Faylni tanlang
+                    </label>
+                    <label for="media-file-input"
+                        class="flex flex-col items-center justify-center w-full p-5 rounded-2xl border-2 border-dashed border-emerald-300 dark:border-emerald-700 bg-emerald-50/50 dark:bg-emerald-900/30 hover:bg-emerald-100/50 dark:hover:bg-emerald-900/50 cursor-pointer transition-colors text-center">
+                        <svg class="w-8 h-8 text-emerald-600 dark:text-emerald-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                        </svg>
+                        <span id="file-drop-label" class="text-xs sm:text-sm font-medium text-slate-700 dark:text-emerald-100">
+                            Rasm faylini tanlash uchun bosing
+                        </span>
+                        <span id="selected-file-name" class="text-xs text-emerald-600 dark:text-emerald-400 font-semibold mt-1 break-all"></span>
+                        <input id="media-file-input" type="file" accept="image/*" class="hidden">
+                    </label>
+                </div>
+
+                <!-- 2. Ovozli xabar bo'limi (Mikrofon orqali yozish YOKI fayl yuklash) -->
+                <div id="audio-upload-section" class="hidden space-y-4">
+                    <!-- Mikrofon orqali jonli yozish bloki -->
+                    <div class="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-900/40 border border-emerald-200 dark:border-emerald-800 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-emerald-100">
+                                Mikrofondan yozib olish
+                            </span>
+                            <span id="record-timer" class="font-mono text-sm font-bold text-emerald-700 dark:text-emerald-300">00:00</span>
+                        </div>
+
+                        <!-- Jonli to'lqin indikatori -->
+                        <div id="recording-wave" class="hidden h-8 flex items-center justify-center gap-1.5">
+                            <span class="wave-bar w-1.5 h-7 rounded-full bg-rose-500"></span>
+                            <span class="wave-bar w-1.5 h-7 rounded-full bg-rose-500"></span>
+                            <span class="wave-bar w-1.5 h-7 rounded-full bg-rose-500"></span>
+                            <span class="wave-bar w-1.5 h-7 rounded-full bg-rose-500"></span>
+                            <span class="wave-bar w-1.5 h-7 rounded-full bg-rose-500"></span>
+                            <span class="ml-2 text-xs font-semibold text-rose-600 dark:text-rose-400">Yozilmoqda...</span>
+                        </div>
+
+                        <!-- Yozish tugmalari -->
+                        <div class="flex items-center gap-2">
+                            <button type="button" id="start-record-btn"
+                                class="flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold shadow transition-all">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                                </svg>
+                                Yozishni boshlash
+                            </button>
+                            <button type="button" id="stop-record-btn" class="hidden flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs sm:text-sm font-semibold shadow transition-all">
+                                <span class="w-3 h-3 rounded-sm bg-white"></span>
+                                To'xtatish
+                            </button>
+                        </div>
+
+                        <!-- Yozib olingan ovozni tinglab ko'rish -->
+                        <div id="recorded-preview-box" class="hidden pt-2 border-t border-emerald-200 dark:border-emerald-800 space-y-2">
+                            <div class="flex items-center justify-between text-xs text-emerald-700 dark:text-emerald-300 font-semibold">
+                                <span>Yozib olingan ovoz tayyor:</span>
+                                <button type="button" id="clear-recorded-btn" class="text-rose-600 dark:text-rose-400 hover:underline">O'chirib qayta yozish</button>
+                            </div>
+                            <audio id="recorded-audio-preview" controls class="w-full h-10"></audio>
+                        </div>
+                    </div>
+
+                    <!-- Yoki tayyor audio fayl yuklash -->
+                    <div class="relative flex items-center justify-center">
+                        <div class="border-t border-slate-200 dark:border-emerald-800 w-full"></div>
+                        <span class="bg-white dark:bg-emerald-950 px-3 text-xs text-slate-400 dark:text-emerald-400 font-medium">yoki</span>
+                        <div class="border-t border-slate-200 dark:border-emerald-800 w-full"></div>
+                    </div>
+
+                    <label for="audio-file-input"
+                        class="flex items-center justify-center gap-2 w-full p-3.5 rounded-2xl border-2 border-dashed border-emerald-300 dark:border-emerald-700 bg-emerald-50/40 dark:bg-emerald-900/20 hover:bg-emerald-100/50 cursor-pointer transition-colors text-xs sm:text-sm font-medium text-slate-700 dark:text-emerald-100">
+                        <svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                        </svg>
+                        <span id="audio-file-label">Qurilmadan audio fayl tanlash</span>
+                        <input id="audio-file-input" type="file" accept="audio/*" class="hidden">
+                    </label>
+                </div>
+
+                <!-- Modal ichidagi xato xabari -->
+                <p id="upload-error" class="hidden text-xs font-semibold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800 rounded-xl p-3"></p>
+
+                <!-- Saqlash tugmasi -->
+                <button type="submit" id="save-media-btn"
+                    class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-bold text-sm shadow-lg shadow-emerald-600/30 transition-all flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>Arxivga saqlash</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- 4. TO'LIQ EKRANLI KO'RISH MODALI (LIGHTBOX: RASM / VIDEO)           -->
+    <!-- =================================================================== -->
+    <div id="lightbox-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md" role="dialog" aria-modal="true">
+        <div class="relative w-full max-w-4xl flex flex-col items-center">
+            <!-- Yuqori panel -->
+            <div class="w-full flex items-center justify-between gap-3 mb-3 text-white">
+                <div class="min-w-0">
+                    <h3 id="lightbox-title" class="text-base sm:text-lg font-bold truncate"></h3>
+                    <p id="lightbox-date" class="text-xs text-emerald-300"></p>
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                    <a id="lightbox-download" href="#" download
+                        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-emerald-950 text-xs font-bold transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        Yuklab olish
+                    </a>
+                    <button id="close-lightbox" type="button" aria-label="Yopish"
+                        class="p-2 rounded-xl bg-white/15 hover:bg-white/25 text-white transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Media konteyner -->
+            <div id="lightbox-body" class="w-full flex items-center justify-center rounded-2xl overflow-hidden bg-black/40 border border-white/15 max-h-[80vh]"></div>
+        </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- 5. O'CHIRISHNI TASDIQLASH MODALI (confirm() O'RNIGA)                -->
+    <!-- =================================================================== -->
+    <div id="delete-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-emerald-950/75 backdrop-blur-md" role="dialog" aria-modal="true">
+        <div class="w-full max-w-sm rounded-3xl bg-white dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800 shadow-2xl p-6 text-center">
+            <div class="w-12 h-12 mx-auto rounded-2xl bg-rose-100 dark:bg-rose-900/40 text-rose-600 dark:text-rose-400 flex items-center justify-center mb-4">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1.5">O'chirishni tasdiqlang</h3>
+            <p id="delete-modal-text" class="text-xs sm:text-sm text-slate-500 dark:text-emerald-200/80 mb-6">
+                Ushbu faylni arxivdan butunlay o'chirmoqchimisiz?
+            </p>
+            <div class="flex items-center gap-2.5">
+                <button id="cancel-delete-btn" type="button"
+                    class="flex-1 py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-emerald-900/60 dark:hover:bg-emerald-800 text-slate-700 dark:text-emerald-100 text-sm font-semibold transition-colors">
+                    Bekor qilish
+                </button>
+                <button id="confirm-delete-btn" type="button"
+                    class="flex-1 py-2.5 px-4 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-sm font-semibold shadow-lg transition-colors">
+                    O'chirish
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- 6. BILDIRISHNOMA (TOAST)                                            -->
+    <!-- =================================================================== -->
+    <div id="toast" role="status" aria-live="polite"
+        class="fixed bottom-5 right-5 z-50 max-w-sm w-[calc(100%-2.5rem)] transform translate-y-24 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="flex items-start gap-3 p-4 rounded-2xl bg-emerald-950 dark:bg-white text-white dark:text-emerald-950 shadow-2xl border border-emerald-700/70 dark:border-emerald-200">
+            <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 dark:text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+                <p id="toast-title" class="text-sm font-semibold">Bildirishnoma</p>
+                <p id="toast-message" class="text-xs text-emerald-200 dark:text-slate-600 mt-0.5 leading-relaxed"></p>
+            </div>
+            <button id="toast-close" type="button" aria-label="Yopish" class="text-emerald-300 hover:text-white dark:text-slate-400 dark:hover:text-emerald-950 p-1 rounded-lg transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- JAVASCRIPT: AVTORIZATSIYA, INDEXEDDB, MEDIA RECORDER VA GALEREYA    -->
+    <!-- =================================================================== -->
+    <script>
+        (function () {
+            'use strict';
+
+            // =================================================================
+            // 1. FAQAT RUXSAT ETILGAN FOYDALANUVCHILAR (LOGIN: PAROL)
+            // =================================================================
+            // Yangi foydalanuvchilarni qo'shish uchun shu obyektga "login": "parol" ko'rinishida yozing:
+            // Masalan: "ota": "1234", "ona": "5678"
+            const ALLOWED_USERS = {
+                "yasena": "2022"
+            };
+
+            const SESSION_KEY = 'yasena_archive_session';
+            const THEME_KEY = 'yasena_archive_theme';
+
+            // Xavfsiz sessionStorage va localStorage yordamchilari
+            const memSession = {};
+            const safeSession = {
+                get(key) {
+                    try { return sessionStorage.getItem(key); } catch (e) { return memSession[key] || null; }
+                },
+                set(key, val) {
+                    try { sessionStorage.setItem(key, val); } catch (e) { memSession[key] = val; }
+                },
+                remove(key) {
+                    try { sessionStorage.removeItem(key); } catch (e) { delete memSession[key]; }
+                }
+            };
+
+            const safeLocal = {
+                get(key) {
+                    try { return localStorage.getItem(key); } catch (e) { return null; }
+                },
+                set(key, val) {
+                    try { localStorage.setItem(key, val); } catch (e) { /* e'tiborsiz */ }
+                }
+            };
+
+            // =================================================================
+            // 2. TOAST BILDIRISHNOMA TIZIMI
+            // =================================================================
+            const toastEl = document.getElementById('toast');
+            const toastTitle = document.getElementById('toast-title');
+            const toastMessage = document.getElementById('toast-message');
+            const toastCloseBtn = document.getElementById('toast-close');
+            let toastTimer = null;
+
+            function showToast(title, message) {
+                toastTitle.textContent = title;
+                toastMessage.textContent = message;
+                toastEl.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(hideToast, 4000);
+            }
+
+            function hideToast() {
+                toastEl.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+            }
+
+            toastCloseBtn.addEventListener('click', hideToast);
+
+            // =================================================================
+            // 3. OCH / TO'Q YASHIL MAVZU BOSHQARUVI
+            // =================================================================
+            const themeToggleBtns = document.querySelectorAll('[data-theme-toggle]');
+
+            function applyTheme(isDark) {
+                document.documentElement.classList.toggle('dark', isDark);
+                document.querySelectorAll('.sun-icon').forEach(el => el.classList.toggle('hidden', !isDark));
+                document.querySelectorAll('.moon-icon').forEach(el => el.classList.toggle('hidden', isDark));
+                safeLocal.set(THEME_KEY, isDark ? 'dark' : 'light');
+            }
+
+            const savedTheme = safeLocal.get(THEME_KEY);
+            applyTheme(savedTheme === 'dark');
+
+            themeToggleBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const isCurrentlyDark = document.documentElement.classList.contains('dark');
+                    applyTheme(!isCurrentlyDark);
+                });
+            });
+
+            // =================================================================
+            // 4. ORQA FONDAGI RASMNI TO'LIQ KO'RISH REJIMI
+            // =================================================================
+            const bgViewToggleBtn = document.getElementById('bg-view-toggle');
+            const restoreUiBtn = document.getElementById('restore-ui-btn');
+            const mainHeader = document.getElementById('main-header');
+            const mainContent = document.getElementById('main-content');
+            const mainFooter = document.getElementById('main-footer');
+            const bgOverlay = document.getElementById('bg-overlay');
+            let isViewingBg = false;
+
+            function setBgViewMode(active) {
+                isViewingBg = active;
+                mainHeader.classList.toggle('opacity-0', active);
+                mainHeader.classList.toggle('pointer-events-none', active);
+                mainContent.classList.toggle('opacity-0', active);
+                mainContent.classList.toggle('pointer-events-none', active);
+                mainFooter.classList.toggle('opacity-0', active);
+                mainFooter.classList.toggle('pointer-events-none', active);
+                bgOverlay.classList.toggle('opacity-0', active);
+                restoreUiBtn.classList.toggle('hidden', !active);
+            }
+
+            bgViewToggleBtn.addEventListener('click', () => setBgViewMode(true));
+            restoreUiBtn.addEventListener('click', () => setBgViewMode(false));
+
+            // =================================================================
+            // 5. INDEXEDDB MA'LUMOTLAR BAZASI (YasenaMediaDB)
+            // =================================================================
+            const DB_NAME = 'YasenaMediaDB';
+            const DB_VERSION = 1;
+            const STORE_NAME = 'mediaItems';
+            let dbInstance = null;
+            let memoryFallbackItems = [];
+
+            function openMediaDB() {
+                return new Promise((resolve) => {
+                    if (!window.indexedDB) {
+                        resolve(null);
+                        return;
+                    }
+                    try {
+                        const request = indexedDB.open(DB_NAME, DB_VERSION);
+                        request.onupgradeneeded = (event) => {
+                            const db = event.target.result;
+                            if (!db.objectStoreNames.contains(STORE_NAME)) {
+                                const store = db.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true });
+                                store.createIndex('type', 'type', { unique: false });
+                                store.createIndex('createdAt', 'createdAt', { unique: false });
+                            }
+                        };
+                        request.onsuccess = (event) => {
+                            dbInstance = event.target.result;
+                            resolve(dbInstance);
+                        };
+                        request.onerror = () => resolve(null);
+                    } catch (err) {
+                        resolve(null);
+                    }
+                });
+            }
+
+            function getAllMediaFromDB() {
+                return new Promise((resolve) => {
+                    if (!dbInstance) {
+                        resolve([...memoryFallbackItems]);
+                        return;
+                    }
+                    try {
+                        const tx = dbInstance.transaction(STORE_NAME, 'readonly');
+                        const store = tx.objectStore(STORE_NAME);
+                        const req = store.getAll();
+                        req.onsuccess = () => resolve(req.result || []);
+                        req.onerror = () => resolve([...memoryFallbackItems]);
+                    } catch (err) {
+                        resolve([...memoryFallbackItems]);
+                    }
+                });
+            }
+
+            function addMediaToDB(item) {
+                return new Promise((resolve, reject) => {
+                    if (!dbInstance) {
+                        const fallbackItem = { ...item, id: Date.now() };
+                        memoryFallbackItems.unshift(fallbackItem);
+                        resolve(fallbackItem.id);
+                        return;
+                    }
+                    try {
+                        const tx = dbInstance.transaction(STORE_NAME, 'readwrite');
+                        const store = tx.objectStore(STORE_NAME);
+                        const req = store.add(item);
+                        req.onsuccess = () => resolve(req.result);
+                        req.onerror = () => reject(new Error('Saqlashda xatolik yuz berdi'));
+                    } catch (err) {
+                        reject(err);
+                    }
+                });
+            }
+
+            function deleteMediaFromDB(id) {
+                return new Promise((resolve, reject) => {
+                    if (!dbInstance) {
+                        memoryFallbackItems = memoryFallbackItems.filter(i => i.id !== id);
+                        resolve();
+                        return;
+                    }
+                    try {
+                        const tx = dbInstance.transaction(STORE_NAME, 'readwrite');
+                        const store = tx.objectStore(STORE_NAME);
+                        const req = store.delete(id);
+                        req.onsuccess = () => resolve();
+                        req.onerror = () => reject(new Error('O\'chirishda xatolik yuz berdi'));
+                    } catch (err) {
+                        reject(err);
+                    }
+                });
+            }
+
+            // =================================================================
+            // 6. AVTORIZATSIYA (YOPIQ KIRISH)
+            // =================================================================
+            const authScreen = document.getElementById('auth-screen');
+            const appContent = document.getElementById('app-content');
+            const loginForm = document.getElementById('login-form');
+            const authFeedback = document.getElementById('auth-feedback');
+            const currentUsernameEl = document.getElementById('current-username');
+            const logoutBtn = document.getElementById('logout-btn');
+            const togglePasswordBtn = document.getElementById('toggle-password-btn');
+            const passwordInput = document.getElementById('login-password');
+            const eyeOpen = document.getElementById('eye-open');
+            const eyeClosed = document.getElementById('eye-closed');
+
+            togglePasswordBtn.addEventListener('click', () => {
+                const isPass = passwordInput.type === 'password';
+                passwordInput.type = isPass ? 'text' : 'password';
+                eyeOpen.classList.toggle('hidden', isPass);
+                eyeClosed.classList.toggle('hidden', !isPass);
+            });
+
+            function showAuthError(msg) {
+                authFeedback.textContent = msg;
+                authFeedback.classList.remove('hidden');
+            }
+
+            function clearAuthError() {
+                authFeedback.textContent = '';
+                authFeedback.classList.add('hidden');
+            }
+
+            function findAllowedUsername(inputName) {
+                const lower = inputName.toLowerCase();
+                return Object.keys(ALLOWED_USERS).find(k => k.toLowerCase() === lower) || null;
+            }
+
+            async function enterArchive(username, silent = false) {
+                safeSession.set(SESSION_KEY, username);
+                currentUsernameEl.textContent = username;
+                authScreen.classList.add('hidden');
+                appContent.classList.remove('hidden');
+                setBgViewMode(false);
+                window.scrollTo({ top: 0, behavior: 'instant' });
+
+                await openMediaDB();
+                await refreshGallery();
+
+                if (!silent) {
+                    showToast('Xush kelibsiz!', `${username}, Yasenaning media-arxiviga muvaffaqiyatli kirdingiz.`);
+                }
+            }
+
+            function logoutArchive() {
+                safeSession.remove(SESSION_KEY);
+                closeLightbox();
+                closeUploadModal();
+                setBgViewMode(false);
+                appContent.classList.add('hidden');
+                authScreen.classList.remove('hidden');
+                loginForm.reset();
+                clearAuthError();
+                showToast('Tizimdan chiqildi', 'Hisobingizdan xavfsiz chiqdingiz.');
+            }
+
+            logoutBtn.addEventListener('click', logoutArchive);
+
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                clearAuthError();
+
+                const username = document.getElementById('login-username').value.trim();
+                const password = passwordInput.value;
+
+                const matchedKey = findAllowedUsername(username);
+                if (matchedKey && ALLOWED_USERS[matchedKey] === password) {
+                    enterArchive(matchedKey);
+                } else {
+                    showAuthError("Login yoki parol noto'g'ri!");
+                }
+            });
+
+            // =================================================================
+            // 7. GALEREYA HOLATI, FILTRLASH VA CHIZISH
+            // =================================================================
+            let allItems = [];
+            let activeFilter = 'all';
+            let searchQuery = '';
+            let activeObjectUrls = [];
+            let pendingDeleteId = null;
+
+            const galleryGrid = document.getElementById('gallery-grid');
+            const emptyState = document.getElementById('empty-state');
+            const emptyStateTitle = document.getElementById('empty-state-title');
+            const emptyStateDesc = document.getElementById('empty-state-desc');
+            const filterTabs = document.querySelectorAll('.filter-tab');
+            const searchInput = document.getElementById('search-input');
+
+            function revokeObjectUrls() {
+                activeObjectUrls.forEach(url => {
+                    try { URL.revokeObjectURL(url); } catch (e) { /* e'tiborsiz */ }
+                });
+                activeObjectUrls = [];
+            }
+
+            function updateCounters() {
+                const photoCount = allItems.filter(i => i.type === 'photo').length;
+                const videoCount = allItems.filter(i => i.type === 'video').length;
+                const audioCount = allItems.filter(i => i.type === 'audio').length;
+                const totalCount = allItems.length;
+
+                document.getElementById('nav-count-photo').textContent = photoCount;
+                document.getElementById('nav-count-video').textContent = videoCount;
+                document.getElementById('nav-count-audio').textContent = audioCount;
+
+                document.getElementById('mob-count-photo').textContent = photoCount;
+                document.getElementById('mob-count-video').textContent = videoCount;
+                document.getElementById('mob-count-audio').textContent = audioCount;
+
+                document.getElementById('tab-count-all').textContent = `(${totalCount})`;
+                document.getElementById('tab-count-photo').textContent = `(${photoCount})`;
+                document.getElementById('tab-count-video').textContent = `(${videoCount})`;
+                document.getElementById('tab-count-audio').textContent = `(${audioCount})`;
+            }
+
+            function formatUzDate(dateStr) {
+                if (!dateStr) return '';
+                const parts = dateStr.split('-');
+                if (parts.length !== 3) return dateStr;
+                const months = ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr'];
+                const year = parts[0];
+                const monthIdx = parseInt(parts[1], 10) - 1;
+                const day = parseInt(parts[2], 10);
+                if (monthIdx >= 0 && monthIdx < 12) {
+                    return `${day}-${months[monthIdx]}, ${year}`;
+                }
+                return dateStr;
+            }
+
+            function escapeHtml(str) {
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            function getSafeFilename(title, type, mimeType) {
+                const base = (title || 'yasena_media').replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '_') || 'yasena_media';
+                if (mimeType) {
+                    if (mimeType.includes('png')) return `${base}.png`;
+                    if (mimeType.includes('webp')) return `${base}.webp`;
+                    if (mimeType.includes('jpeg') || mimeType.includes('jpg')) return `${base}.jpg`;
+                    if (mimeType.includes('mp4')) return `${base}.mp4`;
+                    if (mimeType.includes('webm') && type === 'video') return `${base}.webm`;
+                    if (mimeType.includes('webm') && type === 'audio') return `${base}.webm`;
+                    if (mimeType.includes('ogg')) return `${base}.ogg`;
+                    if (mimeType.includes('mpeg') || mimeType.includes('mp3')) return `${base}.mp3`;
+                    if (mimeType.includes('wav')) return `${base}.wav`;
+                }
+                if (type === 'photo') return `${base}.jpg`;
+                if (type === 'video') return `${base}.mp4`;
+                return `${base}.webm`;
+            }
+
+            async function refreshGallery() {
+                allItems = await getAllMediaFromDB();
+                allItems.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                updateCounters();
+                renderGallery();
+            }
+
+            function renderGallery() {
+                revokeObjectUrls();
+                galleryGrid.innerHTML = '';
+
+                const query = searchQuery.trim().toLowerCase();
+                const filtered = allItems.filter(item => {
+                    const matchesType = activeFilter === 'all' || item.type === activeFilter;
+                    const matchesQuery = !query ||
+                        (item.title && item.title.toLowerCase().includes(query)) ||
+                        (item.date && item.date.includes(query)) ||
+                        formatUzDate(item.date).toLowerCase().includes(query);
+                    return matchesType && matchesQuery;
+                });
+
+                if (filtered.length === 0) {
+                    emptyState.classList.remove('hidden');
+                    if (allItems.length > 0) {
+                        emptyStateTitle.textContent = "Hech narsa topilmadi";
+                        emptyStateDesc.textContent = "Tanlangan bo'lim yoki qidiruv so'rovi bo'yicha mos fayl topilmadi.";
+                    } else {
+                        emptyStateTitle.textContent = "Hozircha hech narsa yuklanmagan";
+                        emptyStateDesc.textContent = "Yasenaning ilk rasmini, videosini yoki ovozli xabarini yuklab, oilaviy arxivni to'ldirishni boshlang!";
+                    }
+                    return;
+                }
+
+                emptyState.classList.add('hidden');
+
+                filtered.forEach(item => {
+                    const blobUrl = URL.createObjectURL(item.blob);
+                    activeObjectUrls.push(blobUrl);
+
+                    const card = document.createElement('article');
+                    card.className = 'group flex flex-col rounded-2xl overflow-hidden bg-emerald-950/60 dark:bg-emerald-950/80 backdrop-blur-md border border-emerald-200/25 shadow-xl hover:border-emerald-300/50 transition-all duration-300';
+
+                    const formattedDate = formatUzDate(item.date);
+                    const safeTitle = escapeHtml(item.title || 'Nomsiz xotira');
+                    const downloadName = getSafeFilename(item.title, item.type, item.mimeType);
+
+                    let mediaHtml = '';
+                    let badgeHtml = '';
+
+                    if (item.type === 'photo') {
+                        badgeHtml = `<span class="px-2.5 py-1 rounded-lg bg-emerald-500/30 border border-emerald-300/30 text-emerald-200 text-[11px] font-semibold">Rasm</span>`;
+                        mediaHtml = `
+                            <div class="relative aspect-[4/3] w-full overflow-hidden bg-emerald-950/60 cursor-pointer media-preview-trigger">
+                                <img src="${blobUrl}" alt="${safeTitle}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-emerald-950/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-end p-3">
+                                    <span class="px-3 py-1.5 rounded-xl bg-black/50 backdrop-blur-md text-white text-xs font-semibold">Kattalashtirish</span>
+                                </div>
+                            </div>
+                        `;
+                    } else if (item.type === 'video') {
+                        badgeHtml = `<span class="px-2.5 py-1 rounded-lg bg-teal-500/30 border border-teal-300/30 text-teal-200 text-[11px] font-semibold">Video</span>`;
+                        mediaHtml = `
+                            <div class="relative aspect-[4/3] w-full overflow-hidden bg-black/70">
+                                <video src="${blobUrl}" controls preload="metadata" class="w-full h-full object-contain"></video>
+                                <button type="button" class="media-preview-trigger absolute top-2.5 right-2.5 p-2 rounded-xl bg-emerald-950/70 hover:bg-emerald-800/90 text-white backdrop-blur-md border border-white/20 transition-colors" title="To'liq ekranda ko'rish">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        `;
+                    } else {
+                        badgeHtml = `<span class="px-2.5 py-1 rounded-lg bg-lime-500/30 border border-lime-300/30 text-lime-200 text-[11px] font-semibold">Ovozli xabar</span>`;
+                        mediaHtml = `
+                            <div class="p-5 bg-gradient-to-br from-emerald-900/60 to-teal-950/70 border-b border-emerald-200/15 flex flex-col items-center justify-center gap-3.5 min-h-[168px]">
+                                <div class="w-14 h-14 rounded-2xl bg-lime-400/20 border border-lime-300/40 text-lime-300 flex items-center justify-center shadow-inner">
+                                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                                    </svg>
+                                </div>
+                                <audio src="${blobUrl}" controls class="w-full h-10"></audio>
+                            </div>
+                        `;
+                    }
+
+                    card.innerHTML = `
+                        ${mediaHtml}
+                        <div class="p-4 flex-1 flex flex-col justify-between gap-3">
+                            <div>
+                                <div class="flex items-center justify-between gap-2 mb-1.5">
+                                    ${badgeHtml}
+                                    <span class="text-[11px] font-medium text-emerald-200/80">${escapeHtml(formattedDate)}</span>
+                                </div>
+                                <h3 class="text-sm sm:text-base font-bold text-white leading-snug line-clamp-2">${safeTitle}</h3>
+                            </div>
+                            <div class="flex items-center justify-end gap-2 pt-2.5 border-t border-emerald-200/15">
+                                <a href="${blobUrl}" download="${escapeHtml(downloadName)}"
+                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-emerald-500 hover:text-emerald-950 text-emerald-100 text-xs font-semibold transition-colors">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                    </svg>
+                                    Yuklab olish
+                                </a>
+                                <button type="button" class="delete-item-btn inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-rose-500/20 hover:bg-rose-500/40 text-rose-200 text-xs font-semibold transition-colors">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                    </svg>
+                                    O'chirish
+                                </button>
+                            </div>
+                        </div>
+                    `;
+
+                    // Lightbox ochish hodisasi
+                    const previewTrigger = card.querySelector('.media-preview-trigger');
+                    if (previewTrigger) {
+                        previewTrigger.addEventListener('click', () => {
+                            openLightbox(item.type, blobUrl, item.title, formattedDate, downloadName);
+                        });
+                    }
+
+                    // O'chirish modali hodisasi
+                    const delBtn = card.querySelector('.delete-item-btn');
+                    delBtn.addEventListener('click', () => {
+                        openDeleteModal(item.id, item.title);
+                    });
+
+                    galleryGrid.appendChild(card);
+                });
+            }
+
+            // Filtr tablari
+            filterTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    activeFilter = tab.getAttribute('data-filter');
+                    filterTabs.forEach(t => {
+                        const isSelected = t === tab;
+                        t.classList.toggle('bg-emerald-500', isSelected);
+                        t.classList.toggle('text-emerald-950', isSelected);
+                        t.classList.toggle('shadow', isSelected);
+                        t.classList.toggle('bg-white/10', !isSelected);
+                        t.classList.toggle('hover:bg-white/20', !isSelected);
+                        t.classList.toggle('text-emerald-50', !isSelected);
+                    });
+                    renderGallery();
+                });
+            });
+
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value;
+                renderGallery();
+            });
+
+            // =================================================================
+            // 8. LIGHTBOX MODALI (RASM VA VIDEO TO'LIQ KO'RINISHI)
+            // =================================================================
+            const lightboxModal = document.getElementById('lightbox-modal');
+            const lightboxTitle = document.getElementById('lightbox-title');
+            const lightboxDate = document.getElementById('lightbox-date');
+            const lightboxBody = document.getElementById('lightbox-body');
+            const lightboxDownload = document.getElementById('lightbox-download');
+            const closeLightboxBtn = document.getElementById('close-lightbox');
+
+            function openLightbox(type, url, title, dateText, downloadName) {
+                lightboxTitle.textContent = title || 'Nomsiz xotira';
+                lightboxDate.textContent = dateText;
+                lightboxDownload.href = url;
+                lightboxDownload.setAttribute('download', downloadName);
+                lightboxBody.innerHTML = '';
+
+                if (type === 'photo') {
+                    const img = document.createElement('img');
+                    img.src = url;
+                    img.alt = title || 'Yasena rasmi';
+                    img.className = 'max-h-[78vh] max-w-full object-contain';
+                    lightboxBody.appendChild(img);
+                } else if (type === 'video') {
+                    const vid = document.createElement('video');
+                    vid.src = url;
+                    vid.controls = true;
+                    vid.autoplay = true;
+                    vid.className = 'max-h-[78vh] max-w-full';
+                    lightboxBody.appendChild(vid);
+                }
+
+                lightboxModal.classList.remove('hidden');
+            }
+
+            function closeLightbox() {
+                lightboxBody.innerHTML = '';
+                lightboxModal.classList.add('hidden');
+            }
+
+            closeLightboxBtn.addEventListener('click', closeLightbox);
+            lightboxModal.addEventListener('click', (e) => {
+                if (e.target === lightboxModal) closeLightbox();
+            });
+
+            // =================================================================
+            // 9. O'CHIRISHNI TASDIQLASH MODALI
+            // =================================================================
+            const deleteModal = document.getElementById('delete-modal');
+            const deleteModalText = document.getElementById('delete-modal-text');
+            const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
+            const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+
+            function openDeleteModal(id, title) {
+                pendingDeleteId = id;
+                deleteModalText.textContent = `"${title || 'Ushbu fayl'}" arxivdan butunlay o'chirilsinmi?`;
+                deleteModal.classList.remove('hidden');
+            }
+
+            function closeDeleteModal() {
+                pendingDeleteId = null;
+                deleteModal.classList.add('hidden');
+            }
+
+            cancelDeleteBtn.addEventListener('click', closeDeleteModal);
+            deleteModal.addEventListener('click', (e) => {
+                if (e.target === deleteModal) closeDeleteModal();
+            });
+
+            confirmDeleteBtn.addEventListener('click', async () => {
+                if (pendingDeleteId === null) return;
+                const idToDelete = pendingDeleteId;
+                closeDeleteModal();
+                try {
+                    await deleteMediaFromDB(idToDelete);
+                    await refreshGallery();
+                    showToast("O'chirildi", "Fayl arxivdan muvaffaqiyatli o'chirildi.");
+                } catch (err) {
+                    showToast("Xatolik", "Faylni o'chirishda muammo yuz berdi.");
+                }
+            });
+
+            // =================================================================
+            // 10. MEDIA QO'SHISH MODALI VA OVOZ YOZISH (MediaRecorder API)
+            // =================================================================
+            const uploadModal = document.getElementById('upload-modal');
+            const closeUploadModalBtn = document.getElementById('close-upload-modal');
+            const uploadTypeTabs = document.querySelectorAll('.upload-type-tab');
+            const uploadForm = document.getElementById('upload-form');
+            const mediaTitleInput = document.getElementById('media-title');
+            const mediaDateInput = document.getElementById('media-date');
+            const fileUploadSection = document.getElementById('file-upload-section');
+            const audioUploadSection = document.getElementById('audio-upload-section');
+            const mediaFileInput = document.getElementById('media-file-input');
+            const fileDropLabel = document.getElementById('file-drop-label');
+            const selectedFileName = document.getElementById('selected-file-name');
+            const audioFileInput = document.getElementById('audio-file-input');
+            const audioFileLabel = document.getElementById('audio-file-label');
+            const uploadError = document.getElementById('upload-error');
+
+            // Ovoz yozish elementlari
+            const startRecordBtn = document.getElementById('start-record-btn');
+            const stopRecordBtn = document.getElementById('stop-record-btn');
+            const recordTimerEl = document.getElementById('record-timer');
+            const recordingWaveEl = document.getElementById('recording-wave');
+            const recordedPreviewBox = document.getElementById('recorded-preview-box');
+            const recordedAudioPreview = document.getElementById('recorded-audio-preview');
+            const clearRecordedBtn = document.getElementById('clear-recorded-btn');
+
+            let currentUploadType = 'photo';
+            let mediaRecorder = null;
+            let activeMicStream = null;
+            let recordedChunks = [];
+            let recordedBlob = null;
+            let recordedPreviewUrl = null;
+            let recordInterval = null;
+            let recordSeconds = 0;
+
+            function getTodayISO() {
+                const now = new Date();
+                const y = now.getFullYear();
+                const m = String(now.getMonth() + 1).padStart(2, '0');
+                const d = String(now.getDate()).padStart(2, '0');
+                return `${y}-${m}-${d}`;
+            }
+
+            function showUploadError(msg) {
+                uploadError.textContent = msg;
+                uploadError.classList.remove('hidden');
+            }
+
+            function clearUploadError() {
+                uploadError.textContent = '';
+                uploadError.classList.add('hidden');
+            }
+
+            function formatTimer(sec) {
+                const m = String(Math.floor(sec / 60)).padStart(2, '0');
+                const s = String(sec % 60).padStart(2, '0');
+                return `${m}:${s}`;
+            }
+
+            function stopMicrophoneTracks() {
+                if (activeMicStream) {
+                    activeMicStream.getTracks().forEach(t => t.stop());
+                    activeMicStream = null;
+                }
+            }
+
+            function resetRecordingState() {
+                if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                    try { mediaRecorder.stop(); } catch (e) { /* e'tiborsiz */ }
+                }
+                stopMicrophoneTracks();
+                clearInterval(recordInterval);
+                recordSeconds = 0;
+                recordTimerEl.textContent = '00:00';
+                recordingWaveEl.classList.add('hidden');
+                startRecordBtn.classList.remove('hidden');
+                stopRecordBtn.classList.add('hidden');
+
+                recordedChunks = [];
+                recordedBlob = null;
+                if (recordedPreviewUrl) {
+                    URL.revokeObjectURL(recordedPreviewUrl);
+                    recordedPreviewUrl = null;
+                }
+                recordedAudioPreview.src = '';
+                recordedPreviewBox.classList.add('hidden');
+            }
+
+            function switchUploadType(type) {
+                currentUploadType = type;
+                clearUploadError();
+                mediaFileInput.value = '';
+                selectedFileName.textContent = '';
+                audioFileInput.value = '';
+                audioFileLabel.textContent = 'Qurilmadan audio fayl tanlash';
+
+                uploadTypeTabs.forEach(tab => {
+                    const isSelected = tab.getAttribute('data-upload-tab') === type;
+                    tab.classList.toggle('bg-emerald-600', isSelected);
+                    tab.classList.toggle('text-white', isSelected);
+                    tab.classList.toggle('shadow', isSelected);
+                    tab.classList.toggle('text-slate-700', !isSelected);
+                    tab.classList.toggle('dark:text-emerald-200', !isSelected);
+                });
+
+                if (type === 'photo') {
+                    fileUploadSection.classList.remove('hidden');
+                    audioUploadSection.classList.add('hidden');
+                    mediaFileInput.setAttribute('accept', 'image/*');
+                    fileDropLabel.textContent = 'Rasm faylini tanlash uchun bosing';
+                } else if (type === 'video') {
+                    fileUploadSection.classList.remove('hidden');
+                    audioUploadSection.classList.add('hidden');
+                    mediaFileInput.setAttribute('accept', 'video/*');
+                    fileDropLabel.textContent = 'Video faylini tanlash uchun bosing';
+                } else {
+                    fileUploadSection.classList.add('hidden');
+                    audioUploadSection.classList.remove('hidden');
+                }
+            }
+
+            function openUploadModal(type = 'photo') {
+                uploadForm.reset();
+                resetRecordingState();
+                mediaDateInput.value = getTodayISO();
+                switchUploadType(type);
+                uploadModal.classList.remove('hidden');
+            }
+
+            function closeUploadModal() {
+                resetRecordingState();
+                uploadModal.classList.add('hidden');
+            }
+
+            document.querySelectorAll('[data-open-upload]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    openUploadModal(btn.getAttribute('data-open-upload'));
+                });
+            });
+
+            uploadTypeTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    resetRecordingState();
+                    switchUploadType(tab.getAttribute('data-upload-tab'));
+                });
+            });
+
+            closeUploadModalBtn.addEventListener('click', closeUploadModal);
+            uploadModal.addEventListener('click', (e) => {
+                if (e.target === uploadModal) closeUploadModal();
+            });
+
+            mediaFileInput.addEventListener('change', () => {
+                clearUploadError();
+                const file = mediaFileInput.files[0];
+                selectedFileName.textContent = file ? file.name : '';
+            });
+
+            audioFileInput.addEventListener('change', () => {
+                clearUploadError();
+                const file = audioFileInput.files[0];
+                if (file) {
+                    resetRecordingState();
+                    audioFileLabel.textContent = file.name;
+                } else {
+                    audioFileLabel.textContent = 'Qurilmadan audio fayl tanlash';
+                }
+            });
+
+            // Mikrofondan ovoz yozishni boshlash
+            startRecordBtn.addEventListener('click', async () => {
+                clearUploadError();
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || typeof MediaRecorder === 'undefined') {
+                    showUploadError("Brauzeringiz mikrofondan ovoz yozishni qo'llab-quvvatlamaydi. Qurilmadan tayyor audio fayl yuklashingiz mumkin.");
+                    return;
+                }
+
+                try {
+                    activeMicStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    recordedChunks = [];
+                    recordedBlob = null;
+                    audioFileInput.value = '';
+                    audioFileLabel.textContent = 'Qurilmadan audio fayl tanlash';
+
+                    mediaRecorder = new MediaRecorder(activeMicStream);
+                    mediaRecorder.ondataavailable = (event) => {
+                        if (event.data && event.data.size > 0) {
+                            recordedChunks.push(event.data);
+                        }
+                    };
+                    mediaRecorder.onstop = () => {
+                        const mimeType = mediaRecorder.mimeType || 'audio/webm';
+                        recordedBlob = new Blob(recordedChunks, { type: mimeType });
+                        if (recordedPreviewUrl) URL.revokeObjectURL(recordedPreviewUrl);
+                        recordedPreviewUrl = URL.createObjectURL(recordedBlob);
+                        recordedAudioPreview.src = recordedPreviewUrl;
+                        recordedPreviewBox.classList.remove('hidden');
+                        stopMicrophoneTracks();
+                    };
+
+                    mediaRecorder.start();
+                    recordSeconds = 0;
+                    recordTimerEl.textContent = '00:00';
+                    recordingWaveEl.classList.remove('hidden');
+                    recordedPreviewBox.classList.add('hidden');
+                    startRecordBtn.classList.add('hidden');
+                    stopRecordBtn.classList.remove('hidden');
+
+                    recordInterval = setInterval(() => {
+                        recordSeconds += 1;
+                        recordTimerEl.textContent = formatTimer(recordSeconds);
+                    }, 1000);
+                } catch (err) {
+                    showUploadError("Mikrofonga ruxsat berilmadi. Brauzer sozlamalaridan mikrofonga ruxsat bering yoki tayyor audio fayl yuklang.");
+                }
+            });
+
+            stopRecordBtn.addEventListener('click', () => {
+                clearInterval(recordInterval);
+                recordingWaveEl.classList.add('hidden');
+                startRecordBtn.classList.remove('hidden');
+                stopRecordBtn.classList.add('hidden');
+                if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                    mediaRecorder.stop();
+                }
+            });
+
+            clearRecordedBtn.addEventListener('click', () => {
+                resetRecordingState();
+            });
+
+            // Media faylni IndexedDB'ga saqlash
+            uploadForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                clearUploadError();
+
+                const title = mediaTitleInput.value.trim();
+                const date = mediaDateInput.value || getTodayISO();
+
+                if (!title) {
+                    showUploadError("Iltimos, sarlavha yoki izoh kiriting.");
+                    return;
+                }
+
+                let fileBlob = null;
+                let mimeType = '';
+
+                if (currentUploadType === 'photo' || currentUploadType === 'video') {
+                    const file = mediaFileInput.files[0];
+                    if (!file) {
+                        showUploadError(currentUploadType === 'photo' ? "Iltimos, rasm faylini tanlang." : "Iltimos, video faylini tanlang.");
+                        return;
+                    }
+                    fileBlob = file;
+                    mimeType = file.type;
+                } else {
+                    if (recordedBlob) {
+                        fileBlob = recordedBlob;
+                        mimeType = recordedBlob.type || 'audio/webm';
+                    } else if (audioFileInput.files[0]) {
+                        fileBlob = audioFileInput.files[0];
+                        mimeType = audioFileInput.files[0].type;
+                    } else {
+                        showUploadError("Iltimos, mikrofondan ovoz yozib oling yoki qurilmadan audio fayl tanlang.");
+                        return;
+                    }
+                }
+
+                try {
+                    await addMediaToDB({
+                        type: currentUploadType,
+                        title,
+                        date,
+                        blob: fileBlob,
+                        mimeType,
+                        createdAt: Date.now()
+                    });
+
+                    closeUploadModal();
+                    await refreshGallery();
+
+                    const typeLabel = currentUploadType === 'photo' ? 'Rasm' : currentUploadType === 'video' ? 'Video' : 'Ovozli xabar';
+                    showToast('Saqlandi!', `${typeLabel} Yasenaning media-arxiviga muvaffaqiyatli qo'shildi.`);
+                } catch (err) {
+                    showUploadError("Faylni saqlashda xatolik yuz berdi. Fayl hajmi juda katta bo'lishi mumkin.");
+                }
+            });
+
+            // ESC tugmasi bilan modallarni yopish
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (!lightboxModal.classList.contains('hidden')) closeLightbox();
+                    else if (!deleteModal.classList.contains('hidden')) closeDeleteModal();
+                    else if (!uploadModal.classList.contains('hidden')) closeUploadModal();
+                    else if (isViewingBg) setBgViewMode(false);
+                }
+            });
+
+            // =================================================================
+            // 11. SAHIFA YUKLANGANDA SESSIYANI TEKSHIRISH
+            // =================================================================
+            const activeSessionUser = safeSession.get(SESSION_KEY);
+            if (activeSessionUser && findAllowedUsername(activeSessionUser)) {
+                enterArchive(findAllowedUsername(activeSessionUser), true);
+            }
+        })();
+    </script>
+</body>
+</html>
