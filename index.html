@@ -73,4 +73,324 @@
     .progress-fill { height: 100%; width: 0%; background: #059669; transition: width 0.25s; }
     .voice-recorder { display: none; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 13px; padding: 12px; text-align: center; margin-bottom: 14px; }
     .user-list { margin-top: 14px; border-top: 1px solid #e2e8f0; padding-top: 12px; display: flex; flex-direction: column; gap: 8px; }
-    .user-row { display: flex; align-items: center; justify-content: space-
+    .user-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: #f8fafc; border: 1px solid #e2e8f0; padding: 9px 11px; border-radius: 11px; }
+    .role-tag { font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 999px; background: #d1fae5; color: #065f46; margin-left: 5px; }
+    .role-tag.admin { background: #fef3c7; color: #92400e; }
+    .viewer-box { background: #0f172a; width: 100%; max-width: 800px; border-radius: 20px; padding: 15px; color: #fff; }
+    .viewer-content { margin-top: 10px; display: flex; justify-content: center; align-items: center; }
+    .viewer-content img { max-width: 100%; max-height: 75vh; border-radius: 12px; }
+    .viewer-content iframe { width: 100%; height: 65vh; border: none; border-radius: 12px; background: #000; }
+  </style>
+</head>
+<body>
+  <div class="backdrop">
+    <div id="loginScreen" class="login-wrap">
+      <div class="login-card">
+        <div class="logo">Y</div>
+        <h1>Yasena Arxiv</h1>
+        <p>5 TB Google Drive shaxsiy media xotirasi</p>
+        <div id="loginErr" class="err-box">Login yoki parol noto'g'ri!</div>
+        <form id="loginForm">
+          <div class="field"><label>Login</label><input type="text" id="loginUser" placeholder="Loginni kiriting" required /></div>
+          <div class="field"><label>Parol</label><input type="password" id="loginPass" placeholder="Parolni kiriting" required /></div>
+          <button type="submit" id="loginSubmitBtn" class="btn btn-primary" style="width:100%; padding:13px;">Kirish</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="appScreen" class="app-container">
+      <div class="topbar">
+        <div class="brand">
+          <div class="brand-icon">Y</div>
+          <div><h2>Yasena Media</h2><span id="currentUserBadge">Google Drive («Yasena Media»)</span></div>
+        </div>
+        <div class="top-actions">
+          <button class="btn btn-primary" onclick="openUploadModal()">+ Yuklash</button>
+          <button id="adminPanelBtn" class="btn btn-admin" style="display:none;" onclick="openAdminModal()">Admin panel</button>
+          <button class="btn btn-light" onclick="document.getElementById('bgInput').click()">Fon rasmini yuklash</button>
+          <input type="file" id="bgInput" accept="image/*" hidden onchange="uploadWallpaper(this.files[0])" />
+          <button class="btn btn-light" onclick="loadAllData()">Yangilash</button>
+          <button class="btn btn-light" onclick="logout()">Chiqish</button>
+        </div>
+      </div>
+      <div class="tabs">
+        <button class="tab-btn active" onclick="setFilter('all', this)">Barchasi</button>
+        <button class="tab-btn" onclick="setFilter('photo', this)">Rasmlar</button>
+        <button class="tab-btn" onclick="setFilter('video', this)">Videolar</button>
+        <button class="tab-btn" onclick="setFilter('voice', this)">Ovozli xabarlar</button>
+      </div>
+      <div class="status-bar"><span id="statusText">Yuklanmoqda...</span></div>
+      <div id="mediaGrid" class="grid"></div>
+    </div>
+  </div>
+
+  <div id="adminModal" class="modal-overlay" onclick="if(event.target===this) closeAdminModal()">
+    <div class="modal-box">
+      <div class="modal-head">
+        <div><h3 style="font-size:17px;">Admin panel</h3><small style="color:#64748b;">Yangi login barcha qurilmalarda ishlaydi</small></div>
+        <button class="close-btn" onclick="closeAdminModal()">×</button>
+      </div>
+      <div id="adminMsgOk" class="ok-box"></div>
+      <div id="adminMsgErr" class="err-box"></div>
+      <form id="addUserForm">
+        <div class="field"><label>Yangi login</label><input type="text" id="newLogin" placeholder="Masalan: jasur" required /></div>
+        <div class="field"><label>Yangi parol</label><input type="text" id="newPass" placeholder="Masalan: 12345" required /></div>
+        <div class="field">
+          <label>Huquq</label>
+          <select id="newRole">
+            <option value="user">Foydalanuvchi (ko'rish va yuklash)</option>
+            <option value="admin">Admin (login qo'sha oladi)</option>
+          </select>
+        </div>
+        <button type="submit" id="addUserBtn" class="btn btn-primary" style="width:100%;">+ Foydalanuvchi qo'shish</button>
+      </form>
+      <div class="user-list" id="adminUsersList"></div>
+    </div>
+  </div>
+
+  <div id="uploadModal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-head">
+        <div><h3 style="font-size:17px;">Google Drive'ga yuklash</h3><small style="color:#64748b;">«Yasena Media» papkasiga saqlanadi</small></div>
+        <button class="close-btn" onclick="closeUploadModal()">×</button>
+      </div>
+      <div class="cat-switch">
+        <button type="button" class="cat-opt active" onclick="selectUploadCat('photo', this)">Rasmlar</button>
+        <button type="button" class="cat-opt" onclick="selectUploadCat('video', this)">Video</button>
+        <button type="button" class="cat-opt" onclick="selectUploadCat('voice', this)">Ovozli xabar</button>
+      </div>
+      <div class="field"><label>Izoh yoki nom (ixtiyoriy)</label><input type="text" id="customName" placeholder="Masalan: Samarqand safari" /></div>
+      <div id="voiceBox" class="voice-recorder">
+        <p id="recStatus" style="font-size:13px; margin-bottom:8px;">Mikrofondan jonli ovoz yozish</p>
+        <button type="button" id="recBtn" class="btn btn-primary" onclick="toggleRecording()">Ovoz yozish</button>
+      </div>
+      <div class="dropzone" onclick="document.getElementById('fileInput').click()">
+        <p id="dropTitle">Bir yoki bir nechta rasm tanlang</p>
+        <small id="selectedInfo">Maksimal hajm: 25 MB</small>
+        <input type="file" id="fileInput" accept="image/*" multiple hidden onchange="handleFileSelect(this.files)" />
+      </div>
+      <div id="uploadErr" class="err-box"></div>
+      <div id="progressWrap" class="progress-wrap">
+        <small id="progressText" style="font-weight:600; color:#047857;">Yuklanmoqda...</small>
+        <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+      </div>
+      <button type="button" id="saveBtn" class="btn btn-primary" style="width:100%; padding:12px;" onclick="startUpload()">✓ Google Drive'ga saqlash</button>
+    </div>
+  </div>
+
+  <div id="viewerModal" class="modal-overlay" onclick="if(event.target===this) closeViewer()">
+    <div class="viewer-box">
+      <div class="modal-head" style="margin-bottom:0;"><span id="viewerTitle" style="font-weight:600; font-size:14px;"></span><button class="close-btn" onclick="closeViewer()">×</button></div>
+      <div id="viewerContent" class="viewer-content"></div>
+    </div>
+  </div>
+
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxV1EdmjkST0kip2extLEuH468MFJEEycdrzCEtPunqV7XIkiqCQPiGpqBTJnlHwbsBkA/exec";
+    const DEFAULT_USERS = [
+      { login: "asilbek", pass: "yasena22", role: "admin" },
+      { login: "admin", pass: "yasena2026", role: "admin" },
+      { login: "yasena", pass: "2222", role: "user" }
+    ];
+    let usersList = [...DEFAULT_USERS], currentSession = null, pendingBackgroundId = null, allMediaFiles = [], currentFilter = "all", uploadCategory = "photo", chosenFiles = [], mediaRecorder = null, audioChunks = [], isRecording = false;
+
+    const encB64 = o => btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    const decB64 = s => { let b = s.replace(/-/g, "+").replace(/_/g, "/"); while (b.length % 4) b += "="; return JSON.parse(decodeURIComponent(escape(atob(b)))); };
+    const esc = s => String(s).replace(/[&<>"']/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[m]));
+
+    function mergeUsers(remote) {
+      const m = new Map();
+      DEFAULT_USERS.forEach(u => m.set(u.login, { ...u }));
+      if (Array.isArray(remote)) remote.forEach(u => { if (u && u.login && u.pass) { const k = String(u.login).trim().toLowerCase(); m.set(k, { login: k, pass: String(u.pass).trim(), role: u.role === "admin" ? "admin" : "user" }); } });
+      usersList = Array.from(m.values());
+    }
+
+    function applyBackgroundById(id) {
+      pendingBackgroundId = id;
+      if (!id || !currentSession || !currentSession.login) return;
+      const urls = [`https://drive.google.com/thumbnail?id=${id}&sz=w1920`, `https://lh3.googleusercontent.com/d/${id}`, `https://drive.google.com/uc?export=view&id=${id}`];
+      let i = 0;
+      const next = () => { if (i >= urls.length || !currentSession) return; const u = urls[i++], img = new Image(); img.onload = () => { if (currentSession) document.body.style.backgroundImage = `url('${u}')`; }; img.onerror = next; img.src = u; };
+      next();
+    }
+
+    async function loadAllData() {
+      const st = document.getElementById("statusText");
+      if (st) st.textContent = "Google Drive'dan yuklanmoqda...";
+      try {
+        const res = await fetch(SCRIPT_URL + "?t=" + Date.now());
+        const data = await res.json();
+        if (!data.ok) return;
+        const files = data.files || [];
+        const uf = files.find(f => f.name && f.name.startsWith("sysusers_"));
+        if (uf) { try { mergeUsers(decB64(uf.name.replace(/^sysusers_/, "").replace(/\.json$/, ""))); } catch (e) {} }
+        allMediaFiles = files.filter(f => f.name && !f.name.startsWith("sysusers_") && !f.name.startsWith("sysbg_"));
+        const bgM = files.find(f => f.name && f.name.startsWith("sysbg_"));
+        const wp = allMediaFiles.find(f => f.category === "wallpaper");
+        const lp = allMediaFiles.find(f => f.category === "photo");
+        let bgId = null;
+        if (bgM) { const id = bgM.name.replace(/^sysbg_/, "").replace(/\.json$/, ""); if (allMediaFiles.some(f => f.id === id)) bgId = id; }
+        if (!bgId && wp) bgId = wp.id;
+        if (!bgId && lp) bgId = lp.id;
+        pendingBackgroundId = bgId;
+        if (currentSession && currentSession.login) { if (pendingBackgroundId) applyBackgroundById(pendingBackgroundId); renderFiles(); renderAdminUsers(); }
+      } catch (e) { if (st) st.textContent = "Xatolik: " + e.message; }
+    }
+
+    window.addEventListener("DOMContentLoaded", async () => {
+      try {
+        const s = JSON.parse(localStorage.getItem("yasena_session") || "null");
+        if (s && s.login) { currentSession = s; showApp(); }
+      } catch (e) { localStorage.removeItem("yasena_session"); }
+      await loadAllData();
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", async e => {
+      e.preventDefault();
+      const btn = document.getElementById("loginSubmitBtn"), err = document.getElementById("loginErr");
+      err.style.display = "none";
+      const u = document.getElementById("loginUser").value.trim().toLowerCase(), p = document.getElementById("loginPass").value.trim();
+      let user = usersList.find(x => x.login === u && x.pass === p);
+      if (!user) { btn.disabled = true; btn.textContent = "Tekshirilmoqda..."; await loadAllData(); user = usersList.find(x => x.login === u && x.pass === p); btn.disabled = false; btn.textContent = "Kirish"; }
+      if (user) { currentSession = { login: user.login, role: user.role }; localStorage.setItem("yasena_session", JSON.stringify(currentSession)); showApp(); if (!allMediaFiles.length) await loadAllData(); }
+      else err.style.display = "block";
+    });
+
+    function showApp() {
+      document.getElementById("loginScreen").style.display = "none";
+      document.getElementById("appScreen").style.display = "block";
+      document.getElementById("currentUserBadge").textContent = `Foydalanuvchi: ${currentSession.login} (${currentSession.role === "admin" ? "Admin" : "A'zo"})`;
+      document.getElementById("adminPanelBtn").style.display = currentSession.role === "admin" ? "inline-flex" : "none";
+      if (pendingBackgroundId) applyBackgroundById(pendingBackgroundId);
+      renderFiles();
+    }
+    function logout() { localStorage.removeItem("yasena_session"); location.reload(); }
+
+    async function postToDrive(payload) {
+      const body = JSON.stringify(payload);
+      try { const r = await fetch(SCRIPT_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body }); return await r.json(); }
+      catch (e) { await fetch(SCRIPT_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body }); return { ok: true }; }
+    }
+
+    function openAdminModal() { document.getElementById("adminMsgOk").style.display = "none"; document.getElementById("adminMsgErr").style.display = "none"; renderAdminUsers(); document.getElementById("adminModal").style.display = "flex"; }
+    function closeAdminModal() { document.getElementById("adminModal").style.display = "none"; }
+
+    function renderAdminUsers() {
+      const box = document.getElementById("adminUsersList");
+      if (!box) return;
+      box.innerHTML = `<div style="font-size:13px; font-weight:700;">Foydalanuvchilar (${usersList.length} ta):</div>`;
+      usersList.forEach(u => {
+        const lock = u.login === "asilbek" || u.login === "admin";
+        const row = document.createElement("div"); row.className = "user-row";
+        row.innerHTML = `<div><div style="font-size:14px; font-weight:700;">${esc(u.login)} <span class="role-tag ${u.role === "admin" ? "admin" : ""}">${u.role === "admin" ? "Admin" : "A'zo"}</span></div><div style="font-size:12px; color:#64748b;">Parol: <b>${esc(u.pass)}</b></div></div>`;
+        if (lock) { const t = document.createElement("small"); t.style.cssText = "color:#94a3b8;font-size:11px;"; t.textContent = "Asosiy"; row.appendChild(t); }
+        else { const b = document.createElement("button"); b.className = "btn btn-sm btn-danger"; b.textContent = "O'chirish"; b.onclick = () => removeUser(u.login); row.appendChild(b); }
+        box.appendChild(row);
+      });
+    }
+
+    document.getElementById("addUserForm").addEventListener("submit", async e => {
+      e.preventDefault();
+      const ok = document.getElementById("adminMsgOk"), err = document.getElementById("adminMsgErr"), btn = document.getElementById("addUserBtn");
+      ok.style.display = "none"; err.style.display = "none";
+      const login = document.getElementById("newLogin").value.trim().toLowerCase(), pass = document.getElementById("newPass").value.trim(), role = document.getElementById("newRole").value;
+      btn.disabled = true; btn.textContent = "Saqlanmoqda...";
+      try {
+        const list = usersList.filter(u => u.login !== login); list.push({ login, pass, role });
+        await postToDrive({ category: "sysusers", fileName: `${encB64(list)}.json`, mimeType: "application/json", base64: "e30=" });
+        usersList = list; renderAdminUsers();
+        document.getElementById("newLogin").value = ""; document.getElementById("newPass").value = "";
+        ok.textContent = `«${login}» saqlandi!`; ok.style.display = "block";
+      } catch (e) { err.textContent = "Xatolik: " + e.message; err.style.display = "block"; }
+      finally { btn.disabled = false; btn.textContent = "+ Foydalanuvchi qo'shish"; }
+    });
+
+    async function removeUser(login) {
+      if (!confirm(`«${login}» foydalanuvchisini o'chirmoqchimisiz?`)) return;
+      const list = usersList.filter(u => u.login !== login);
+      await postToDrive({ category: "sysusers", fileName: `${encB64(list)}.json`, mimeType: "application/json", base64: "e30=" });
+      usersList = list; renderAdminUsers();
+    }
+
+    function setFilter(f, btn) { currentFilter = f; document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active")); btn.classList.add("active"); renderFiles(); }
+
+    function renderFiles() {
+      const grid = document.getElementById("mediaGrid"), st = document.getElementById("statusText");
+      const list = allMediaFiles.filter(f => f.category !== "wallpaper" && (currentFilter === "all" || f.category === currentFilter));
+      st.textContent = `Jami fayllar: ${list.length} ta`; grid.innerHTML = "";
+      if (!list.length) { grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; color:#f1f5f9; padding:40px;">Hozircha fayllar yo'q. «+ Yuklash» tugmasini bosing.</div>`; return; }
+      list.forEach(file => {
+        const card = document.createElement("div"); card.className = "media-card";
+        const date = new Date(file.createdAt).toLocaleDateString("uz-UZ");
+        let thumb = "", badge = "Rasm", bgBtn = "";
+        if (file.category === "photo") { thumb = `<img src="https://drive.google.com/thumbnail?id=${file.id}&sz=w800" loading="lazy" onerror="this.src='${file.thumbUrl}'" />`; bgBtn = `<button class="btn btn-sm btn-outline" onclick="setAsBackground('${file.id}')">Fonga qo'yish</button>`; }
+        else if (file.category === "video") { badge = "Video"; thumb = `<div class="icon-ph">▶<div style="font-size:13px;color:#fff;margin-top:5px;">Ochish</div></div>`; }
+        else { badge = "Ovozli"; thumb = `<div class="icon-ph">🎙<div style="font-size:13px;color:#fff;margin-top:5px;">Tinglash</div></div>`; }
+        card.innerHTML = `<div class="media-thumb" onclick="openViewerById('${file.id}')"><span class="media-badge">${badge}</span>${thumb}</div><div class="media-body"><div class="media-title">${esc(file.name)}</div><div class="media-meta">${date}</div><div class="media-actions"><a class="link-btn" href="${file.downloadUrl}" target="_blank">Yuklab olish</a><div style="display:flex;gap:6px;">${bgBtn}<button class="btn btn-sm btn-danger" onclick="deleteFile('${file.id}')">O'chirish</button></div></div></div>`;
+        grid.appendChild(card);
+      });
+    }
+
+    async function setAsBackground(id) {
+      applyBackgroundById(id);
+      document.getElementById("statusText").textContent = "Fon rasmi saqlanmoqda...";
+      await postToDrive({ category: "sysbg", fileName: `${id}.json`, mimeType: "application/json", base64: "e30=" });
+      document.getElementById("statusText").textContent = "Fon rasmi yangilandi!";
+    }
+
+    function openUploadModal() { chosenFiles = []; document.getElementById("fileInput").value = ""; document.getElementById("customName").value = ""; document.getElementById("selectedInfo").textContent = "Maksimal hajm: 25 MB"; document.getElementById("uploadErr").style.display = "none"; document.getElementById("progressWrap").style.display = "none"; document.getElementById("uploadModal").style.display = "flex"; }
+    function closeUploadModal() { if (isRecording && mediaRecorder) mediaRecorder.stop(); document.getElementById("uploadModal").style.display = "none"; }
+    function selectUploadCat(cat, btn) {
+      uploadCategory = cat; chosenFiles = [];
+      document.querySelectorAll(".cat-opt").forEach(b => b.classList.remove("active")); btn.classList.add("active");
+      const inp = document.getElementById("fileInput"), t = document.getElementById("dropTitle"), vb = document.getElementById("voiceBox");
+      if (cat === "photo") { inp.accept = "image/*"; t.textContent = "Bir yoki bir nechta rasm tanlang"; vb.style.display = "none"; }
+      else if (cat === "video") { inp.accept = "video/*"; t.textContent = "Video fayl tanlang"; vb.style.display = "none"; }
+      else { inp.accept = "audio/*"; t.textContent = "Audio fayl tanlang"; vb.style.display = "block"; }
+    }
+    function handleFileSelect(files) { chosenFiles = Array.from(files); if (chosenFiles.length) document.getElementById("selectedInfo").textContent = chosenFiles.map(f => f.name).join(", "); }
+
+    async function toggleRecording() {
+      const btn = document.getElementById("recBtn"), st = document.getElementById("recStatus");
+      if (!isRecording) {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          mediaRecorder = new MediaRecorder(stream); audioChunks = [];
+          mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+          mediaRecorder.onstop = () => { const file = new File([new Blob(audioChunks, { type: "audio/webm" })], `ovoz_${Date.now()}.webm`, { type: "audio/webm" }); chosenFiles = [file]; document.getElementById("selectedInfo").textContent = `Yozildi: ${file.name}`; stream.getTracks().forEach(t => t.stop()); };
+          mediaRecorder.start(); isRecording = true; btn.textContent = "To'xtatish"; btn.style.background = "#dc2626"; st.textContent = "Yozilmoqda...";
+        } catch (e) { alert("Mikrofon xatosi: " + e.message); }
+      } else { mediaRecorder.stop(); isRecording = false; btn.textContent = "Qayta yozish"; btn.style.background = "#059669"; st.textContent = "Ovoz tayyor!"; }
+    }
+
+    const fileToBase64 = f => new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result.split(",")[1]); r.onerror = rej; r.readAsDataURL(f); });
+
+    async function startUpload() {
+      const err = document.getElementById("uploadErr"); err.style.display = "none";
+      if (!chosenFiles.length) { err.textContent = "Avval fayl tanlang!"; err.style.display = "block"; return; }
+      const btn = document.getElementById("saveBtn"), pw = document.getElementById("progressWrap"), pt = document.getElementById("progressText"), pf = document.getElementById("progressFill"), note = document.getElementById("customName").value.trim();
+      btn.disabled = true; pw.style.display = "block";
+      try {
+        for (let i = 0; i < chosenFiles.length; i++) {
+          const f = chosenFiles[i]; pt.textContent = `${i + 1} / ${chosenFiles.length} yuklanmoqda...`; pf.style.width = Math.round(((i + 0.5) / chosenFiles.length) * 100) + "%";
+          const b64 = await fileToBase64(f), ext = f.name.includes(".") ? "." + f.name.split(".").pop() : "", name = note ? (chosenFiles.length > 1 ? `${note}_${i + 1}${ext}` : `${note}${ext}`) : f.name;
+          await postToDrive({ category: uploadCategory, fileName: name, mimeType: f.type || "application/octet-stream", base64: b64 });
+        }
+        pf.style.width = "100%"; pt.textContent = "Saqlandi!";
+        setTimeout(async () => { closeUploadModal(); await loadAllData(); }, 400);
+      } catch (e) { err.textContent = "Xatolik: " + e.message; err.style.display = "block"; }
+      finally { btn.disabled = false; }
+    }
+
+    async function uploadWallpaper(file) { if (!file) return; document.getElementById("statusText").textContent = "Fon rasmi yuklanmoqda..."; const b64 = await fileToBase64(file); await postToDrive({ category: "wallpaper", fileName: "bg.jpg", mimeType: file.type || "image/jpeg", base64: b64 }); await loadAllData(); }
+    async function deleteFile(id) { if (!confirm("O'chirmoqchimisiz?")) return; await postToDrive({ action: "delete", id }); await loadAllData(); }
+    function openViewerById(id) {
+      const file = allMediaFiles.find(f => f.id === id); if (!file) return;
+      document.getElementById("viewerTitle").textContent = file.name;
+      document.getElementById("viewerContent").innerHTML = file.category === "photo" ? `<img src="https://drive.google.com/thumbnail?id=${file.id}&sz=w1600" onerror="this.src='${file.thumbUrl}'" />` : `<iframe src="${file.previewUrl}" allow="autoplay"></iframe>`;
+      document.getElementById("viewerModal").style.display = "flex";
+    }
+    function closeViewer() { document.getElementById("viewerContent").innerHTML = ""; document.getElementById("viewerModal").style.display = "none"; }
+  </script>
+</body>
+</html>
