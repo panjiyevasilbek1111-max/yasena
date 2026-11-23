@@ -294,7 +294,7 @@
       font-size: 14px;
       font-weight: 500;
       margin-bottom: 16px;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
     }
 
     .grid {
@@ -476,6 +476,8 @@
       margin-top: 6px;
       color: #047857;
       font-size: 12px;
+      line-height: 1.45;
+      word-break: break-word;
     }
 
     .progress-wrap {
@@ -652,7 +654,7 @@
 
       <form id="addUserForm">
         <div class="field">
-          <label>Yangi login</label>
+          <label>Yangi login (boshqa foydalanuvchi uchun)</label>
           <input type="text" id="newLogin" placeholder="Masalan: jasur" required />
         </div>
         <div class="field">
@@ -679,14 +681,14 @@
       <div class="modal-head">
         <div>
           <h3 style="font-size:18px;">Google Drive'ga yuklash</h3>
-          <small style="color:#64748b;">Fayllar «Yasena Media» papkasiga saqlanadi</small>
+          <small style="color:#64748b;">Bir vaqtda bir nechta rasm yoki video yuklash mumkin</small>
         </div>
         <button class="close-btn" onclick="closeUploadModal()">×</button>
       </div>
 
       <div class="cat-switch">
         <button type="button" class="cat-opt active" data-cat="photo" onclick="selectUploadCat('photo', this)">Rasmlar</button>
-        <button type="button" class="cat-opt" data-cat="video" onclick="selectUploadCat('video', this)">Video</button>
+        <button type="button" class="cat-opt" data-cat="video" onclick="selectUploadCat('video', this)">Videolar</button>
         <button type="button" class="cat-opt" data-cat="voice" onclick="selectUploadCat('voice', this)">Ovozli xabar</button>
       </div>
 
@@ -702,7 +704,7 @@
 
       <div class="dropzone" onclick="document.getElementById('fileInput').click()">
         <p id="dropTitle">Bir yoki bir nechta rasm tanlash uchun bosing</p>
-        <small id="selectedInfo">Maksimal hajm: bitta fayl uchun 25 MB</small>
+        <small id="selectedInfo">Bir nechta faylni birdan belgilash mumkin (har biri maks. 25 MB)</small>
         <input type="file" id="fileInput" accept="image/*" multiple hidden onchange="handleFileSelect(this.files)" />
       </div>
 
@@ -733,7 +735,6 @@
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxV1EdmjkST0kip2extLEuH468MFJEEycdrzCEtPunqV7XIkiqCQPiGpqBTJnlHwbsBkA/exec";
 
-    // Doimiy zaxira admin va foydalanuvchilar
     const DEFAULT_USERS = [
       { login: "asilbek", pass: "yasena22", role: "admin" },
       { login: "admin", pass: "yasena2026", role: "admin" },
@@ -781,7 +782,6 @@
       usersList = Array.from(map.values());
     }
 
-    // Orqa fon rasmini ishonchli yuklash (bir nechta Google Drive havolasi orqali)
     function applyBackgroundById(fileId) {
       if (!fileId) return;
       const candidates = [
@@ -803,7 +803,6 @@
       tryNext();
     }
 
-    // Google Drive'dan foydalanuvchilar, fon rasmi va media fayllarni olish
     async function loadAllData() {
       const status = document.getElementById("statusText");
       if (status) status.textContent = "Google Drive'dan ma'lumotlar yuklanmoqda...";
@@ -815,7 +814,6 @@
 
         rawDriveFiles = data.files || [];
 
-        // 1. Eng oxirgi foydalanuvchilar ro'yxatini sinxronlash
         const userCfgFile = rawDriveFiles.find(f => f.name && f.name.startsWith("sysusers_"));
         if (userCfgFile) {
           try {
@@ -827,15 +825,12 @@
           }
         }
 
-        // 2. Media fayllarni ajratib olish (tizim fayllarini yashirish)
         allMediaFiles = rawDriveFiles.filter(f =>
           f.name &&
           !f.name.startsWith("sysusers_") &&
           !f.name.startsWith("sysbg_")
         );
 
-        // 3. Orqa fon rasmini aniqlash:
-        // Avval tanlangan sysbg_, keyin alohida wallpaper, bo'lmasa oxirgi yuklangan rasm!
         const bgMarker = rawDriveFiles.find(f => f.name && f.name.startsWith("sysbg_"));
         const wallpaperFile = allMediaFiles.find(f => f.category === "wallpaper");
         const latestPhoto = allMediaFiles.find(f => f.category === "photo");
@@ -878,7 +873,6 @@
       await loadAllData();
     });
 
-    // Tizimga kirish
     document.getElementById("loginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       const btn = document.getElementById("loginSubmitBtn");
@@ -924,7 +918,6 @@
       location.reload();
     }
 
-    // Google Apps Script'ga xatosiz POST yuborish
     async function postToDrive(payload) {
       const bodyStr = JSON.stringify(payload);
       try {
@@ -966,19 +959,29 @@
         const isProtected = u.login === "asilbek" || u.login === "admin";
         const row = document.createElement("div");
         row.className = "user-row";
-        row.innerHTML = `
-          <div>
-            <div style="font-size:14px; font-weight:700;">
-              ${escapeHtml(u.login)}
-              <span class="role-tag ${u.role === "admin" ? "admin" : ""}">${u.role === "admin" ? "Admin" : "Foydalanuvchi"}</span>
-            </div>
-            <div style="font-size:12px; color:#64748b;">Parol: <b>${escapeHtml(u.pass)}</b></div>
+
+        const info = document.createElement("div");
+        info.innerHTML = `
+          <div style="font-size:14px; font-weight:700;">
+            ${escapeHtml(u.login)}
+            <span class="role-tag ${u.role === "admin" ? "admin" : ""}">${u.role === "admin" ? "Admin" : "Foydalanuvchi"}</span>
           </div>
-          ${isProtected
-            ? `<small style="color:#94a3b8; font-size:11px;">Asosiy</small>`
-            : `<button class="btn btn-sm btn-danger" onclick="removeUser('${escapeHtml(u.login)}')">O'chirish</button>`
-          }
+          <div style="font-size:12px; color:#64748b;">Parol: <b>${escapeHtml(u.pass)}</b></div>
         `;
+        row.appendChild(info);
+
+        if (isProtected) {
+          const badge = document.createElement("small");
+          badge.style.cssText = "color:#94a3b8; font-size:11px;";
+          badge.textContent = "Asosiy";
+          row.appendChild(badge);
+        } else {
+          const delBtn = document.createElement("button");
+          delBtn.className = "btn btn-sm btn-danger";
+          delBtn.textContent = "O'chirish";
+          delBtn.onclick = () => removeUser(u.login);
+          row.appendChild(delBtn);
+        }
         box.appendChild(row);
       });
     }
@@ -1086,7 +1089,7 @@
         }
 
         card.innerHTML = `
-          <div class="media-thumb" onclick='openViewer(${JSON.stringify(file).replace(/'/g, "&#39;")})'>
+          <div class="media-thumb" onclick="openViewerById('${file.id}')">
             <span class="media-badge">${badge}</span>
             ${previewHtml}
           </div>
@@ -1112,7 +1115,6 @@
       }[m]));
     }
 
-    // Istalgan rasmni orqa fonga o'rnatish (barcha qurilmalarda saqlanadi)
     async function setAsBackground(fileId) {
       applyBackgroundById(fileId);
       document.getElementById("statusText").textContent = "Orqa fon rasmi saqlanmoqda...";
@@ -1125,12 +1127,14 @@
       document.getElementById("statusText").textContent = "Orqa fon rasmi yangilandi!";
     }
 
-    // Yuklash modali boshqaruvi
+    // Yuklash modali boshqaruvi (bir nechta rasm va videoni qo'llab-quvvatlaydi)
     function openUploadModal() {
       chosenFiles = [];
-      document.getElementById("fileInput").value = "";
+      const input = document.getElementById("fileInput");
+      input.value = "";
+      input.multiple = true;
       document.getElementById("customName").value = "";
-      document.getElementById("selectedInfo").textContent = "Maksimal hajm: bitta fayl uchun 25 MB";
+      document.getElementById("selectedInfo").textContent = "Bir nechta faylni birdan belgilash mumkin (har biri maks. 25 MB)";
       document.getElementById("uploadErr").style.display = "none";
       document.getElementById("progressWrap").style.display = "none";
       document.getElementById("uploadModal").style.display = "flex";
@@ -1150,6 +1154,8 @@
       const input = document.getElementById("fileInput");
       const title = document.getElementById("dropTitle");
       const voiceBox = document.getElementById("voiceBox");
+      input.value = "";
+      input.multiple = true;
 
       if (cat === "photo") {
         input.accept = "image/*";
@@ -1157,21 +1163,21 @@
         voiceBox.style.display = "none";
       } else if (cat === "video") {
         input.accept = "video/*";
-        title.textContent = "Video fayl tanlash uchun bosing";
+        title.textContent = "Bir yoki bir nechta video tanlash uchun bosing";
         voiceBox.style.display = "none";
       } else {
         input.accept = "audio/*";
-        title.textContent = "Tayyor audio fayl tanlash uchun bosing";
+        title.textContent = "Bir yoki bir nechta audio fayl tanlash uchun bosing";
         voiceBox.style.display = "block";
       }
-      document.getElementById("selectedInfo").textContent = "Maksimal hajm: bitta fayl uchun 25 MB";
+      document.getElementById("selectedInfo").textContent = "Bir nechta faylni birdan belgilash mumkin (har biri maks. 25 MB)";
     }
 
     function handleFileSelect(files) {
       chosenFiles = Array.from(files);
       if (chosenFiles.length > 0) {
         const names = chosenFiles.map(f => `${f.name} (${(f.size / 1024 / 1024).toFixed(1)} MB)`).join(", ");
-        document.getElementById("selectedInfo").textContent = names;
+        document.getElementById("selectedInfo").textContent = `Tanlandi (${chosenFiles.length} ta): ${names}`;
       }
     }
 
@@ -1271,7 +1277,7 @@
         }
 
         progFill.style.width = "100%";
-        progText.textContent = "Muvaffaqiyatli saqlandi!";
+        progText.textContent = `Barcha ${chosenFiles.length} ta fayl muvaffaqiyatli saqlandi!`;
         setTimeout(async () => {
           closeUploadModal();
           await loadAllData();
@@ -1312,7 +1318,9 @@
       }
     }
 
-    function openViewer(file) {
+    function openViewerById(id) {
+      const file = allMediaFiles.find(f => f.id === id);
+      if (!file) return;
       document.getElementById("viewerTitle").textContent = file.name;
       const content = document.getElementById("viewerContent");
       if (file.category === "photo") {
